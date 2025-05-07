@@ -1,9 +1,7 @@
-﻿using HRBackend.Apllication.Interface;
-using HRBackend.Application.Interface;
+﻿using HRBackend.Application.Interface;
 using HRBackend.Application.Request;
 using HRBackend.Domain.Entities;
 using HRBackend.Domain.Enums;
-using Microsoft.EntityFrameworkCore;
 
 namespace HRBackend.Application.Services
 {
