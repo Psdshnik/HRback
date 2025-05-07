@@ -26,14 +26,15 @@ namespace HRBackend.Web.Controllers
         [HttpPost("create-candidate")]
         [Authorize(Roles = "HR")]
         [SwaggerOperation(Summary = "Создание кандидата", Description = "Создает нового кандидата")]
-        [SwaggerResponse(200, "Кандидат успешно создан", typeof(CandidateDTO))]
+        //[SwaggerResponse(200, "Кандидат успешно создан", typeof(CandidateDTO))]
         [SwaggerResponse(401, "Пользователь не имеет прав", typeof(string))]
         [SwaggerResponse(400, "Ошибка при создании кандидата", typeof(string))]
+        [Obsolete("DTO только для общения между слоями и в ответ, DTO не может быть запросом")]
         public async Task<IActionResult> CreateCandidate([FromQuery] CandidateDTO candidate, CancellationToken cancellationToken)
         {
             try
             {
-                CandidateCreateRequest request;
+                CandidateCreateRequest request = null;
 
                 var result = await _candidateService.CreateCandidateAsync(request, cancellationToken);
                 return Ok(result);

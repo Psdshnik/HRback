@@ -1,5 +1,4 @@
 ﻿// HRBackend.Persistence/DependencyInjection.cs
-using HRBackend.Apllication.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,8 +9,13 @@ namespace HRBackend.Persistence
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<IAppDbContext, AppDbContext>(options =>
-                options.UseMySQL(configuration.GetConnectionString("DefaultConnection")));
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<AppDbContext>(options =>
+               options.UseNpgsql(connectionString,
+                builder =>
+                {
+                    builder.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName);
+                }));
 
             return services;
         }

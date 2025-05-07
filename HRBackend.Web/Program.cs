@@ -25,10 +25,8 @@ namespace HRBackend.Web
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Подключение к БД
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-            builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseMySQL(connectionString));
+            
+            
 
             // Добавление контроллеров и Swagger
             builder.Services.AddControllersWithViews();
@@ -111,8 +109,8 @@ namespace HRBackend.Web
 
 
 
-            // Health Checks и UI
-            builder.Services.AddHealthChecks().AddMySql(connectionString);
+            //// Health Checks и UI
+            //builder.Services.AddHealthChecks().AddMySql(connectionString);это вообще хз зачем
 
 
             builder.Services.AddScoped<IWorkingGroupService, WorkingGroupService>();

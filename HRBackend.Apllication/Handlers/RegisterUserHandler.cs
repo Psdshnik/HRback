@@ -8,7 +8,10 @@ using HRBackend.Domain.Repositories;
 
 namespace HRBackend.Application.Handlers
 {
-    public class RegisterUserHandler(IUserReposiotry userReposiotry,IMapper mapper) : IRequestHandler<RegisterUserHRRequest, UserDTO>
+    public class RegisterUserHandler(IUserReposiotry userReposiotry,
+        IMapper mapper,
+        IUnitOfWork unitOfWork
+        ) : IRequestHandler<RegisterUserHRRequest, UserDTO>
     {
 
 
@@ -18,11 +21,7 @@ namespace HRBackend.Application.Handlers
             var existingUser = await userReposiotry.GetByAd(request.Login);
 
 
-            var workSchedule = await _context.WorkSchedules
-                .FirstOrDefaultAsync(ws => ws.Id == request.WorkScheduleId, cancellationToken);
-
-            var workingGroup = await _context.WorkGroups
-                .FirstOrDefaultAsync(wg => wg.Id == request.WorkingGroupId, cancellationToken);
+          
 
             if (existingUser != null)
             {
@@ -37,15 +36,15 @@ namespace HRBackend.Application.Handlers
                 Login = request.Login,
                 Password = request.Password, 
                 Role = UserRolesEnum.HR,
-                WorkSchedule = workSchedule,
-                WorkingGroup = workingGroup
+                //WorkSchedule = workSchedule,
+                //WorkingGroup = workingGroup
             };
 
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync(cancellationToken);
+            //_context.Users.Add(user);через репозиторий
 
+            await unitOfWork.SaveAsync();
             // Используем AutoMapper для преобразования в DTO
-            return _mapper.Map<UserDTO>(user);
+            return mapper.Map<UserDTO>(user);
         }
     }
 }
