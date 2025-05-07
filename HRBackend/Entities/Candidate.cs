@@ -11,6 +11,7 @@ namespace HRBackend.Domain.Entities
         public int Id { get; set; }
         public DateTime DateUp { get; set; }
         public DictStatusCandidata StatusCandidataId { get; set; }
+        public int WorkScheduleId { get; set; }
         public WorkSchedule WorkSchedule { get; set; }
         public WorkingGroup WorkingGroup { get; set; }
         public PersonalInfo PersonalInfo { get; set; }

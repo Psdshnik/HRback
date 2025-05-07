@@ -10,7 +10,8 @@ namespace HRBackend.Domain.Entities
         public string Middlename { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public WorkSchedule WorkSchedule { get; set; }
+        public int WorkingGroupId { get; set; }
+       
         public WorkingGroup WorkingGroup { get; set; }
         public UserRolesEnum Role { get; set; }
     }
