@@ -47,7 +47,7 @@ namespace HRBackend.Application.Services
                 return "Неверные ID для рабочего расписания или рабочей группы.";
             }
 
-            var user = new Users
+            var user = new User
             {
                 Surname = request.Surname,
                 Name = request.Name,
@@ -67,7 +67,7 @@ namespace HRBackend.Application.Services
 
 
 
-        public async Task<Users> AuthenticateUserAsync(string login, string password, CancellationToken cancellationToken)
+        public async Task<User> AuthenticateUserAsync(string login, string password, CancellationToken cancellationToken)
         {
             // Проверка существования пользователя с таким логином и паролем
             var user = await _context.Users

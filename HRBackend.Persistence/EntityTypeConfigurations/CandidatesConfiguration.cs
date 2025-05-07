@@ -4,9 +4,9 @@ using HRBackend.Domain.Entities;
 
 namespace HRBackend.Persistence.EntityTypeConfigurations
 {
-    public class CandidatesConfiguration : IEntityTypeConfiguration<Candidates>
+    public class CandidatesConfiguration : IEntityTypeConfiguration<Candidate>
     {
-        public void Configure(EntityTypeBuilder<Candidates> builder)
+        public void Configure(EntityTypeBuilder<Candidate> builder)
         {
             builder.ToTable("candidates");
 

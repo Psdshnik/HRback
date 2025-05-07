@@ -13,3 +13,12 @@ C:\Users\kiril\source\repos\HRBacked\HRBackend.Apllication\obj\Debug\net8.0\HRBa
 C:\Users\kiril\source\repos\HRBacked\HRBackend.Apllication\obj\Debug\net8.0\refint\HRBackend.Apllication.dll
 C:\Users\kiril\source\repos\HRBacked\HRBackend.Apllication\obj\Debug\net8.0\HRBackend.Apllication.pdb
 C:\Users\kiril\source\repos\HRBacked\HRBackend.Apllication\obj\Debug\net8.0\ref\HRBackend.Apllication.dll
+C:\GitLab\KirTest\HRBackend.Apllication\obj\Debug\net8.0\HRBackend.Apllication.csproj.AssemblyReference.cache
+C:\GitLab\KirTest\HRBackend.Apllication\obj\Debug\net8.0\HRBackend.Apllication.GeneratedMSBuildEditorConfig.editorconfig
+C:\GitLab\KirTest\HRBackend.Apllication\obj\Debug\net8.0\HRBackend.Apllication.AssemblyInfoInputs.cache
+C:\GitLab\KirTest\HRBackend.Apllication\obj\Debug\net8.0\HRBackend.Apllication.AssemblyInfo.cs
+C:\GitLab\KirTest\HRBackend.Apllication\obj\Debug\net8.0\HRBackend.Apllication.csproj.CoreCompileInputs.cache
+C:\GitLab\KirTest\HRBackend.Apllication\obj\Debug\net8.0\HRBackend.Apllication.sourcelink.json
+C:\GitLab\KirTest\HRBackend.Apllication\obj\Debug\net8.0\HRBackend.Apllication.dll
+C:\GitLab\KirTest\HRBackend.Apllication\obj\Debug\net8.0\refint\HRBackend.Apllication.dll
+C:\GitLab\KirTest\HRBackend.Apllication\obj\Debug\net8.0\HRBackend.Apllication.pdb

@@ -1,4 +1,5 @@
-﻿using HRBackend.Domain.Enums;
+﻿using HRBackend.Domain.Entities;
+using HRBackend.Domain.Enums;
 
 namespace HRBackend.Application.DTO
 {
@@ -10,5 +11,14 @@ namespace HRBackend.Application.DTO
         public string Middlename { get; set; }
         public string Login { get; set; }
         public UserRolesEnum Role { get; set; }
+        public UserDTO(User user)
+        {
+            Id = user.Id;
+            Login = user.Login;
+            Name = user.Name;
+            Surname = user.Surname;
+            Middlename = user.Middlename;
+            Role = user.Role;
+        }
     }
 }

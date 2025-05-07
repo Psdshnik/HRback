@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HRBackend.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4a261b4bb45deeb3d772855ff5a072e9a90376ff")]
 [assembly: System.Reflection.AssemblyProductAttribute("HRBackend.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HRBackend.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

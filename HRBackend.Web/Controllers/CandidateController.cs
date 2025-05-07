@@ -35,7 +35,6 @@ namespace HRBackend.Web.Controllers
             {
                 CandidateCreateRequest request;
 
-                request.UserId = User.
                 var result = await _candidateService.CreateCandidateAsync(request, cancellationToken);
                 return Ok(result);
             }

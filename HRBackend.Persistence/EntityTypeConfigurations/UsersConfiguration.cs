@@ -4,9 +4,9 @@ using HRBackend.Domain.Entities;
 
 namespace HRBackend.Persistence.EntityTypeConfigurations
 {
-    public class UsersConfiguration : IEntityTypeConfiguration<Users>
+    public class UsersConfiguration : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<Users> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.ToTable("users");
 

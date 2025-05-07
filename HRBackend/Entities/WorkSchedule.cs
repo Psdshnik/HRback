@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace HRBackend.Domain.Entities
 {
+    //енам конечно
     public class WorkSchedule // #вопрос ОТСАВЛЯТЬ КАК СПРАВОЧНИК ИЛИ ДЕЛАТЬ ENUM?????????????????
     {
         public int Id { get; set; }

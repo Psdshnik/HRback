@@ -11,7 +11,7 @@ namespace HRBackend.Domain.Entities
     {
         public int Id { get; set; }
         public DateTime DateCheck { get; set; }
-        public Users User { get; set; }
+        public User User { get; set; }
         public string Event { get; set; }
     }
 }

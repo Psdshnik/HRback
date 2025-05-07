@@ -2,76 +2,43 @@
 using HRBackend.Application.Request;
 using HRBackend.Application.Interface;
 using HRBackend.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using HRBackend.Apllication.Interface;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
+using HRBackend.Domain.Repositories;
 
 namespace HRBackend.Application.Services
 {
-    public class CandidateService : ICandidateService
+    public class CandidateService(IUserReposiotry userReposiotry, 
+        ICandidateRepository candidateRepository,
+        IUnitOfWork unitOfWork) : ICandidateService
     {
-        private readonly IAppDbContext _context;
-
-        public CandidateService(IAppDbContext context)
-        {
-            _context = context;
-        }
 
         // Метод создания кандидата
         public async Task<CandidateDTO> CreateCandidateAsync(CandidateCreateRequest request, CancellationToken cancellationToken)
         {
             // Получаем необходимые зависимости (WorkSchedule, WorkingGroup, StatusCandidata) по ID
-            var workSchedule = await _context.WorkSchedules
-                .FirstOrDefaultAsync(ws => ws.Id == request.WorkScheduleId, cancellationToken);
+            var user = userReposiotry.GetById(request.UserId);//тут у тебя уже внутри есть и WorkSchedule и WorkingGroup
+            if (user == null)
+                throw new Exception("");
+           //статусы не нужно держать в базе, достаточно создать Enum и проверять что значение в контроллер пришедшее является этим Enum
 
-            var workingGroup = await _context.WorkGroups
-                .FirstOrDefaultAsync(wg => wg.Id == request.WorkingGroupId, cancellationToken);
-
-            var statusCandidata = await _context.DictStatusCandidata
-                .FirstOrDefaultAsync(sc => sc.Id == request.StatusCandidataId, cancellationToken);
-
-            var personalInfo = await _context.PersonalInfo
-                .FirstOrDefaultAsync(pi => pi.Id == request.PersonalInfoId, cancellationToken);
-
-            if (workSchedule == null || workingGroup == null || statusCandidata == null)
-            {
-                throw new Exception("WorkSchedule, WorkingGroup, StatusCandidata или PersonalInfo не найдены.");
-            }
-
+          
             // Создаем нового кандидата
-            var newCandidate = new Candidates
+            var newCandidate = new Candidate
             {
-                WorkSchedule = workSchedule,
-                WorkingGroup = workingGroup,
-                StatusCandidataId = statusCandidata,
+                
+                //WorkSchedule = workSchedule,
+                //WorkingGroup = workingGroup,
+                //StatusCandidataId = statusCandidata,
                 //PersonalInfo = personalInfo,
                 DateUp = DateTime.UtcNow
             };
 
             // Добавляем кандидата в базу данных
-            _context.Candidates.Add(newCandidate);
-            
-            await _context.SaveChangesAsync(cancellationToken);
+            candidateRepository.Add(newCandidate);
 
+
+            await unitOfWork.SaveAsync();
             // Возвращаем DTO с данными кандидата, получая их из связанного объекта PersonalInfo
-            return new CandidateDTO
-            {
-                Id = newCandidate.Id,
-                Name = newCandidate.PersonalInfo.Name,
-                Surname = newCandidate.PersonalInfo.Surname,
-                Middlename = newCandidate.PersonalInfo.Middlename,
-                Email = newCandidate.PersonalInfo.Email,
-                Phone = newCandidate.PersonalInfo.Phone,
-                SocialMedia = newCandidate.PersonalInfo.NameSocail,  // Пример использования других данных
-                Country = request.Country,  // Пример использования данных из запроса
-                BirthDate = request.BirthDate,  // Пример использования данных из запроса
-                WorkSchedule = newCandidate.WorkSchedule.Name,
-                WorkingGroup = newCandidate.WorkingGroup.Name,
-                Status = newCandidate.StatusCandidataId.Name,
-               // DateUp = newCandidate.DateUp
-            };
+            return new CandidateDTO(newCandidate);
         }
 
         // Метод редактирования кандидата

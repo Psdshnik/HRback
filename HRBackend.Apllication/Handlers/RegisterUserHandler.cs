@@ -1,32 +1,21 @@
 ﻿using AutoMapper;
 using HRBackend.Application.DTO;
 using HRBackend.Application.Request;
-using HRBackend.Application.Interface;
 using HRBackend.Domain.Entities;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using HRBackend.Apllication.Interface;
 using HRBackend.Domain.Enums;
-using HRBackend.Domain.Entities;
+using HRBackend.Domain.Repositories;
 
 namespace HRBackend.Application.Handlers
 {
-    public class RegisterUserHandler : IRequestHandler<RegisterUserHRRequest, UserDTO>
+    public class RegisterUserHandler(IUserReposiotry userReposiotry,IMapper mapper) : IRequestHandler<RegisterUserHRRequest, UserDTO>
     {
-        private readonly IAppDbContext _context;
-        private readonly IMapper _mapper;
 
-        public RegisterUserHandler(IAppDbContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-        }
 
         public async Task<UserDTO> Handle(RegisterUserHRRequest request, CancellationToken cancellationToken)
         {
             // Проверка, что пользователь с таким логином уже существует
-            var existingUser = await _context.Users
-                .FirstOrDefaultAsync(u => u.Login == request.Login, cancellationToken);
+            var existingUser = await userReposiotry.GetByAd(request.Login);
 
 
             var workSchedule = await _context.WorkSchedules
@@ -40,7 +29,7 @@ namespace HRBackend.Application.Handlers
                 throw new Exception("Пользователь с таким логином уже существует.");
             }
 
-            var user = new Users
+            var user = new User
             {
                 Name = request.Name,
                 Surname = request.Surname,

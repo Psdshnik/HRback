@@ -1,21 +1,12 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using HRBackend.Apllication.Interface;
 using HRBackend.Application.DTO;
+using HRBackend.Domain.Repositories;
 
-public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, List<UserDTO>>
+public class GetAllUsersQueryHandler(IUserReposiotry userRepository) : IRequestHandler<GetAllUsersQuery, IEnumerable<UserDTO>?>
 {
-    private readonly IAppDbContext _context;
-
-    public GetAllUsersQueryHandler(IAppDbContext context)
+    public async Task<IEnumerable<UserDTO>?> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
     {
-        _context = context;
-    }
-
-    public async Task<List<UserDTO>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
-    {
-        return await _context.Users
-            .Select(u => new UserDTO { Id = u.Id, Login = u.Login })
-            .ToListAsync(cancellationToken);
+        return (await userRepository.GetAll())?
+            .Select(u => new UserDTO(u));
     }
 }

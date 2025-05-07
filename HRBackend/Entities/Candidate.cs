@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HRBackend.Domain.Entities
 {
-    public class Candidates
+    public class Candidate
     {
         public int Id { get; set; }
         public DateTime DateUp { get; set; }
@@ -14,6 +14,6 @@ namespace HRBackend.Domain.Entities
         public WorkSchedule WorkSchedule { get; set; }
         public WorkingGroup WorkingGroup { get; set; }
         public PersonalInfo PersonalInfo { get; set; }
-        public Users User { get; set; }
+        public User User { get; set; }
     }
 }

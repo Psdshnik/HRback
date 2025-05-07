@@ -17,3 +17,12 @@ C:\Users\kiril\source\repos\HRBacked\HRBackend.Persistence\obj\Debug\net8.0\refi
 C:\Users\kiril\source\repos\HRBacked\HRBackend.Persistence\obj\Debug\net8.0\HRBackend.Persistence.pdb
 C:\Users\kiril\source\repos\HRBacked\HRBackend.Persistence\obj\Debug\net8.0\HRBackend.Persistence.genruntimeconfig.cache
 C:\Users\kiril\source\repos\HRBacked\HRBackend.Persistence\obj\Debug\net8.0\ref\HRBackend.Persistence.dll
+C:\GitLab\KirTest\HRBackend.Persistence\obj\Debug\net8.0\HRBackend.Persistence.csproj.AssemblyReference.cache
+C:\GitLab\KirTest\HRBackend.Persistence\obj\Debug\net8.0\HRBackend.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\GitLab\KirTest\HRBackend.Persistence\obj\Debug\net8.0\HRBackend.Persistence.AssemblyInfoInputs.cache
+C:\GitLab\KirTest\HRBackend.Persistence\obj\Debug\net8.0\HRBackend.Persistence.AssemblyInfo.cs
+C:\GitLab\KirTest\HRBackend.Persistence\obj\Debug\net8.0\HRBackend.Persistence.csproj.CoreCompileInputs.cache
+C:\GitLab\KirTest\HRBackend.Persistence\obj\Debug\net8.0\HRBackend.Persistence.sourcelink.json
+C:\GitLab\KirTest\HRBackend.Persistence\obj\Debug\net8.0\HRBackend.Persistence.dll
+C:\GitLab\KirTest\HRBackend.Persistence\obj\Debug\net8.0\refint\HRBackend.Persistence.dll
+C:\GitLab\KirTest\HRBackend.Persistence\obj\Debug\net8.0\HRBackend.Persistence.pdb

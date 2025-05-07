@@ -1,15 +1,14 @@
-﻿using HRBackend.Apllication.Interface;
-using HRBackend.Domain.Entities;
+﻿using HRBackend.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using HRBackend.Persistence.EntityTypeConfigurations;
 
 namespace HRBackend.Persistence
 {
-    public class AppDbContext : DbContext, IAppDbContext
+    public class AppDbContext : DbContext
     {
-        public DbSet<Users> Users { get; set; } 
+        public DbSet<User> Users { get; set; } 
         public DbSet<Employees> Employees { get; set; } 
-        public DbSet<Candidates> Candidates { get; set; } 
+        public DbSet<Candidate> Candidates { get; set; } 
         public DbSet<PersonalInfo> PersonalInfo { get; set; } 
         public DbSet<TypeSocail> TypeSocail { get; set; } 
         public DbSet<WorkingGroup> WorkGroups { get; set; } 

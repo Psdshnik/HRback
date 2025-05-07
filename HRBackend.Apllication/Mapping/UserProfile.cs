@@ -8,7 +8,7 @@ namespace HRBackend.Application.Mapping
     {
         public UserProfile()
         {
-            CreateMap<Users, UserDTO>(); 
+            CreateMap<User, UserDTO>(); 
         }
     }
 }

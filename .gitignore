@@ -1,1 +1,13 @@
 .vs/
+
+HRBackend.Application/bin
+HRBackend.Application/obj
+
+HRBackend.Persistance/bin
+HRBackend.Persistance/obj
+
+HRBackend.Web/bin
+HRBackend.Web/obj
+
+HRBackend/bin
+HRBackend/obj

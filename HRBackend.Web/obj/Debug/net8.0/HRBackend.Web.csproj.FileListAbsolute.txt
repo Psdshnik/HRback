@@ -170,3 +170,16 @@ C:\Users\kiril\source\repos\HRBacked\HRBackend.Web\bin\Debug\net8.0\Swashbuckle.
 C:\Users\kiril\source\repos\HRBacked\HRBackend.Web\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\kiril\source\repos\HRBacked\HRBackend.Web\obj\Debug\net8.0\HRBackend.Web.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\kiril\source\repos\HRBacked\HRBackend.Web\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\GitLab\KirTest\HRBackend.Web\obj\Debug\net8.0\HRBackend.Web.csproj.AssemblyReference.cache
+C:\GitLab\KirTest\HRBackend.Web\obj\Debug\net8.0\HRBackend.Web.GeneratedMSBuildEditorConfig.editorconfig
+C:\GitLab\KirTest\HRBackend.Web\obj\Debug\net8.0\HRBackend.Web.AssemblyInfoInputs.cache
+C:\GitLab\KirTest\HRBackend.Web\obj\Debug\net8.0\HRBackend.Web.AssemblyInfo.cs
+C:\GitLab\KirTest\HRBackend.Web\obj\Debug\net8.0\HRBackend.Web.csproj.CoreCompileInputs.cache
+C:\GitLab\KirTest\HRBackend.Web\obj\Debug\net8.0\HRBackend.Web.MvcApplicationPartsAssemblyInfo.cs
+C:\GitLab\KirTest\HRBackend.Web\obj\Debug\net8.0\HRBackend.Web.MvcApplicationPartsAssemblyInfo.cache
+C:\GitLab\KirTest\HRBackend.Web\obj\Debug\net8.0\HRBackend.Web.RazorAssemblyInfo.cache
+C:\GitLab\KirTest\HRBackend.Web\obj\Debug\net8.0\HRBackend.Web.RazorAssemblyInfo.cs
+C:\GitLab\KirTest\HRBackend.Web\obj\Debug\net8.0\HRBackend.Web.sourcelink.json
+C:\GitLab\KirTest\HRBackend.Web\obj\Debug\net8.0\HRBackend.Web.dll
+C:\GitLab\KirTest\HRBackend.Web\obj\Debug\net8.0\refint\HRBackend.Web.dll
+C:\GitLab\KirTest\HRBackend.Web\obj\Debug\net8.0\HRBackend.Web.pdb
