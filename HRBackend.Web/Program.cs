@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using HealthChecks.UI.Client;
 using HRBackend.Application.DTO;
-using HRBackend.Application.Handlers;
 using HRBackend.Application.Interface;
 using HRBackend.Application.Mapping;
 using HRBackend.Application.Request;
@@ -93,7 +92,7 @@ namespace HRBackend.Web
             builder.Services.AddAutoMapper(typeof(WorkingGroupProfile)); // Регистрируем профиль AutoMapper вручную
 
 
-            builder.Services.AddScoped<IRequestHandler<LoginRequest, UserDTO>, AuthenticateUserHandler>();
+            //builder.Services.AddScoped<IRequestHandler<LoginRequest, UserDTO>, AuthenticateUserHandler>();
 
             // Регистрация сервиса UserService
             builder.Services.AddScoped<IUserService, UserService>();
@@ -114,7 +113,7 @@ namespace HRBackend.Web
 
 
             builder.Services.AddScoped<IWorkingGroupService, WorkingGroupService>();
-            builder.Services.AddScoped<IRequestHandler<WorkingGroupRequest, WorkingGroupDTO>, WorkingGroupCreateHandler>();
+            /*builder.Services.AddScoped<IRequestHandler<WorkingGroupRequest, WorkingGroupDTO>, WorkingGroupCreateHandler>();
 
             builder.Services.AddScoped<IRequestHandler<UpdateWorkingGroupRequest, WorkingGroupDTO>, WorkingGroupUpdateHandler>();
 
@@ -122,7 +121,7 @@ namespace HRBackend.Web
 
 
             builder.Services.AddScoped<ICandidateService, CandidateService>();
-            builder.Services.AddScoped<IRequestHandler<CandidateCreateRequest, CandidateDTO>, CandidateCreateHandler>();
+            builder.Services.AddScoped<IRequestHandler<CandidateCreateRequest, CandidateDTO>, CandidateCreateHandler>();*/
 
 
             builder.Services.AddHealthChecksUI(options =>

@@ -1,5 +1,4 @@
 ﻿using HRBackend.Domain.Entities;
-using MediatR;
 
 namespace HRBackend.Application.DTO
 {
@@ -17,7 +16,7 @@ namespace HRBackend.Application.DTO
         public string WorkSchedule { get; set; }
         public string WorkingGroup { get; set; }
         public string Status { get; set; }
-        public CandidateDTO(Candidate newCandidate)
+        /*public CandidateDTO(Candidate newCandidate)
         {
             Id = newCandidate.Id;
             Name = newCandidate.PersonalInfo.Name;
@@ -32,6 +31,6 @@ namespace HRBackend.Application.DTO
             WorkingGroup = newCandidate.WorkingGroup.Name;
             Status = newCandidate.StatusCandidataId.Name;
             // DateUp = newCandidate.DateUp
-        }
+        }*/
     }
 }

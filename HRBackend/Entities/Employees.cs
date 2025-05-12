@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HRBackend.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,8 @@ namespace HRBackend.Domain.Entities
     {
         public int Id { get; set; }
         public DateTime DateAdd { get; set; }
+        public int PersonalInfoId { get; set; }
         public PersonalInfo PersonalInfo { get; set; }
-        public WorkSchedule WorkSchedule { get; set; }
+        public NameWorkScheduleEnum NameWorkSchedule { get; set; }
     }
 }

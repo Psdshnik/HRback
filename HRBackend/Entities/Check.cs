@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Nodes;
-using System.Threading.Tasks;
+﻿using HRBackend.Domain.Entities;
 
-namespace HRBackend.Domain.Entities
+public class Check
 {
-    public class Check
-    {
-        public int Id { get; set; }
-        public DateTime DateCheck { get; set; }
-        public User User { get; set; }
-        public string Event { get; set; }
-    }
+    public int Id { get; set; }
+    public DateTime DateCheck { get; set; }
+    public int CreatedId { get; set; } // HR который делает проверку
+    public string Event { get; set; }
+    public int UserId { get; set; } // Пользователь которого проверяют 
+    public User User { get; set; }
 }

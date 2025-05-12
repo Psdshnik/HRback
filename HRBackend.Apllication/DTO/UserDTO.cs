@@ -11,7 +11,7 @@ namespace HRBackend.Application.DTO
         public string Middlename { get; set; }
         public string Login { get; set; }
         public UserRolesEnum Role { get; set; }
-        public UserDTO(User user)
+        /*public UserDTO(User user)
         {
             Id = user.Id;
             Login = user.Login;
@@ -19,6 +19,6 @@ namespace HRBackend.Application.DTO
             Surname = user.Surname;
             Middlename = user.Middlename;
             Role = user.Role;
-        }
+        }*/
     }
 }
