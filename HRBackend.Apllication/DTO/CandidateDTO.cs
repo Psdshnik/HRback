@@ -16,21 +16,23 @@ namespace HRBackend.Application.DTO
         public string WorkSchedule { get; set; }
         public string WorkingGroup { get; set; }
         public string Status { get; set; }
-        /*public CandidateDTO(Candidate newCandidate)
+
+        // Конструктор для маппинга данных из сущности Candidate
+        public CandidateDTO(Candidate newCandidate)
         {
             Id = newCandidate.Id;
-            Name = newCandidate.PersonalInfo.Name;
-            Surname = newCandidate.PersonalInfo.Surname;
-            Middlename = newCandidate.PersonalInfo.Middlename;
-            Email = newCandidate.PersonalInfo.Email;
-            Phone = newCandidate.PersonalInfo.Phone;
-            SocialMedia = newCandidate.PersonalInfo.NameSocail;  // Пример использования других данных
-            Country = request.Country;  // Пример использования данных из запроса, !!! если у тебя что-то в бд не идет, то в запросе оно не нужно и назад оно не нужно
-            BirthDate = request.BirthDate;  // Пример использования данных из запроса
-            WorkSchedule = newCandidate.WorkSchedule.Name;
-            WorkingGroup = newCandidate.WorkingGroup.Name;
-            Status = newCandidate.StatusCandidataId.Name;
-            // DateUp = newCandidate.DateUp
-        }*/
+            Name = newCandidate.PersonalInfo?.Name ?? string.Empty;  // Проверяем на null
+            Surname = newCandidate.PersonalInfo?.Surname ?? string.Empty;  // Проверяем на null
+            Middlename = newCandidate.PersonalInfo?.Middlename ?? string.Empty;  // Проверяем на null
+            Email = newCandidate.PersonalInfo?.Email ?? string.Empty;  // Проверяем на null
+            Phone = newCandidate.PersonalInfo?.Phone ?? string.Empty;  // Проверяем на null
+            SocialMedia = newCandidate.PersonalInfo?.NameSocail.ToString() ?? string.Empty;  // Проверяем на null
+            Country = newCandidate.PersonalInfo?.Country?.Name ?? string.Empty;  // Проверяем на null, предполагается, что PersonalInfo имеет связь с DictCountry
+            BirthDate = newCandidate.PersonalInfo?.DateAdd ?? DateTime.MinValue;  // Используем DateAdd или другое поле, если BirthDate не хранится в PersonalInfo
+
+            WorkSchedule = newCandidate.NameWorkSchedule.ToString();  // Преобразуем в строку, так как это enum
+            WorkingGroup = newCandidate.WorkingGroup?.Name ?? string.Empty;  // Проверяем на null
+            Status = newCandidate.StatusCandidat.ToString();  // Преобразуем в строку, так как это enum
+        }
     }
 }

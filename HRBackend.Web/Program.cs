@@ -6,12 +6,12 @@ using HRBackend.Application.Mapping;
 using HRBackend.Application.Request;
 using HRBackend.Application.Services;
 using HRBackend.Persistence;
-using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Npgsql;
 using System.Reflection;
 using System.Security.Claims;
 using System.Text;
@@ -23,9 +23,6 @@ namespace HRBackend.Web
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            
-            
 
             // Добавление контроллеров и Swagger
             builder.Services.AddControllersWithViews();
@@ -58,8 +55,11 @@ namespace HRBackend.Web
                 });
             }); // Добавление Swagger
 
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
             // Регистрация инфраструктуры (для работы с БД)
-            builder.Services.AddInfrastructure(builder.Configuration);
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseNpgsql(connectionString)); // PostgreSQL подключение
 
             // Настройки JWT из конфигурации
             var jwtSection = builder.Configuration.GetSection("JwtSettings");
@@ -86,43 +86,20 @@ namespace HRBackend.Web
 
             builder.Services.AddAuthorization(); // Добавление авторизации
 
-            // Регистрация MediatR
+            // Регистрация сервисов
+            //builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IWorkingGroupService, WorkingGroupService>();
-            builder.Services.AddMediatR(typeof(Program).Assembly);  // Регистрация MediatR для всех обработчиков
-            builder.Services.AddAutoMapper(typeof(WorkingGroupProfile)); // Регистрируем профиль AutoMapper вручную
-
-
-            //builder.Services.AddScoped<IRequestHandler<LoginRequest, UserDTO>, AuthenticateUserHandler>();
-
-            // Регистрация сервиса UserService
-            builder.Services.AddScoped<IUserService, UserService>();
-
-
-            builder.Services.AddHttpContextAccessor();
-
-            // Регистрация JwtService для генерации токенов
-            builder.Services.AddScoped<JwtService>();
+            //builder.Services.AddScoped<ICandidateService, CandidateService>();
 
             // Регистрация AutoMapper
             builder.Services.AddAutoMapper(typeof(Program).Assembly); // Добавьте AutoMapper здесь
 
+            // Добавление HttpContextAccessor
+            builder.Services.AddHttpContextAccessor();
 
-
-            //// Health Checks и UI
-            //builder.Services.AddHealthChecks().AddMySql(connectionString);это вообще хз зачем
-
-
-            builder.Services.AddScoped<IWorkingGroupService, WorkingGroupService>();
-            /*builder.Services.AddScoped<IRequestHandler<WorkingGroupRequest, WorkingGroupDTO>, WorkingGroupCreateHandler>();
-
-            builder.Services.AddScoped<IRequestHandler<UpdateWorkingGroupRequest, WorkingGroupDTO>, WorkingGroupUpdateHandler>();
-
-            builder.Services.AddScoped<IRequestHandler<DeleteWorkingGroupRequest, bool>, WorkingGroupDeleteHandler>();
-
-
-            builder.Services.AddScoped<ICandidateService, CandidateService>();
-            builder.Services.AddScoped<IRequestHandler<CandidateCreateRequest, CandidateDTO>, CandidateCreateHandler>();*/
-
+            // Регистрация Health Check и проверка состояния PostgreSQL
+            builder.Services.AddHealthChecks()
+                .AddNpgSql(connectionString, name: "PostgreSQL", timeout: TimeSpan.FromSeconds(5));
 
             builder.Services.AddHealthChecksUI(options =>
             {
@@ -157,12 +134,6 @@ namespace HRBackend.Web
 
             // Аутентификация и авторизация
             app.UseAuthentication();
-            //app.Use(async (context, next) =>
-            //{
-            //    var token = context.Request.Headers["Authorization"].ToString();
-            //    Console.WriteLine($"Received token: {token}");  // Логируем токен
-            //    await next.Invoke();
-            //});
             app.UseAuthorization();
 
             // Health Check endpoints
@@ -182,6 +153,8 @@ namespace HRBackend.Web
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+
+            Console.WriteLine("Подключение к PostgreSQL успешно настроено.");
         }
     }
 }

@@ -1,11 +1,7 @@
 ﻿using HRBackend.Domain.Entities;
+using HRBackend.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HRBackend.Persistence.EntityTypeConfigurations
 {
@@ -15,10 +11,10 @@ namespace HRBackend.Persistence.EntityTypeConfigurations
         {
             builder.ToTable("personal_info");
 
-            builder.HasIndex(p => p.Id);
-
             builder.HasKey(p => p.Id)
                   .HasName("pk_personal_info");
+
+            builder.HasIndex(p => p.Id);
 
             builder.Property(p => p.Name)
                   .HasColumnName("name")
@@ -50,17 +46,23 @@ namespace HRBackend.Persistence.EntityTypeConfigurations
                   .HasMaxLength(55)
                   .IsRequired();
 
+            // Конфигурация для enum
             builder.Property(p => p.NameSocail)
-                  .HasColumnName("name_socail")
-                  .HasColumnType("varchar(55)")
-                  .HasMaxLength(55)
-                  .IsRequired();
+                .HasColumnName("name_socail")
+                .HasConversion<string>()
+                .HasMaxLength(20)
+                .IsRequired();
 
             builder.Property(p => p.DateAdd)
                   .HasColumnName("date_add")
-                  .HasColumnType("datetime")
+                  .HasColumnType("timestamp")
                   .HasDefaultValueSql("CURRENT_TIMESTAMP");
-                  
+
+            // Добавляем связь с Country
+            builder.HasOne(p => p.Country)
+                .WithMany()
+                .HasForeignKey(p => p.CountryId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

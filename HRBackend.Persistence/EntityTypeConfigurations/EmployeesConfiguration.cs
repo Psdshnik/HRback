@@ -1,4 +1,5 @@
 ﻿using HRBackend.Domain.Entities;
+using HRBackend.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,8 +18,20 @@ namespace HRBackend.Persistence.EntityTypeConfigurations
 
             builder.Property(e => e.DateAdd)
                   .HasColumnName("date_add")
-                  .HasColumnType("datetime")
+                  .HasColumnType("timestamp")
                   .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+            // Добавляем конфигурацию для enum
+            builder.Property(e => e.NameWorkSchedule)
+                .HasColumnName("work_schedule")
+                .HasConversion<string>()
+                .HasMaxLength(20);
+
+            // Добавляем связь с PersonalInfo
+            builder.HasOne(e => e.PersonalInfo)
+                .WithMany()
+                .HasForeignKey(e => e.PersonalInfoId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

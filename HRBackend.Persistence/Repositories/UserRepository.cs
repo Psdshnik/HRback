@@ -1,11 +1,6 @@
 ﻿using HRBackend.Domain.Entities;
 using HRBackend.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HRBackend.Persistence.Repositories
 {

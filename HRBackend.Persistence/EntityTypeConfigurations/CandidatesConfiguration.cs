@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using HRBackend.Domain.Entities;
+using HRBackend.Domain.Enums;
 
 namespace HRBackend.Persistence.EntityTypeConfigurations
 {
@@ -14,7 +15,12 @@ namespace HRBackend.Persistence.EntityTypeConfigurations
                    .HasName("PK_candidates");
 
             builder.HasIndex(e => e.Id);
-        }
 
+            // Добавляем конфигурацию для enum
+            builder.Property(e => e.StatusCandidat)
+                .HasColumnName("status")
+                .HasConversion<string>()
+                .HasMaxLength(20);
+        }
     }
 }

@@ -10,14 +10,12 @@ namespace HRBackend.Persistence.EntityTypeConfigurations
         {
             builder.ToTable("check");
 
-            builder.HasKey(x => x.Id);
-
             builder.HasKey(c => c.Id)
                   .HasName("pk_check");
 
             builder.Property(c => c.DateCheck)
                   .HasColumnName("date_check")
-                  .HasColumnType("datetime")
+                  .HasColumnType("timestamp")
                   .HasDefaultValueSql("CURRENT_TIMESTAMP")
                   .IsRequired();
 
@@ -25,6 +23,12 @@ namespace HRBackend.Persistence.EntityTypeConfigurations
                   .HasColumnName("event")
                   .HasColumnType("text")
                   .IsRequired();
+
+            // Добавляем связи
+            builder.HasOne(c => c.User)
+                .WithMany()
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

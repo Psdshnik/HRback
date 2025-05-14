@@ -22,10 +22,12 @@ public class CandidateController : ControllerBase
     [SwaggerResponse(200, "Кандидат успешно создан", typeof(CandidateDTO))]
     [SwaggerResponse(401, "Пользователь не имеет прав", typeof(string))]
     [SwaggerResponse(400, "Ошибка при создании кандидата", typeof(string))]
-    public async Task<IActionResult> CreateCandidate([FromBody] CandidateCreateRequest request, CancellationToken cancellationToken)
+    public async Task<IActionResult> CreateCandidate([FromQuery] CandidateDTO candidate, CancellationToken cancellationToken)
     {
         try
         {
+            CandidateCreateRequest request = null;
+
             var result = await _candidateService.CreateCandidateAsync(request, cancellationToken);
             return Ok(result);
         }
