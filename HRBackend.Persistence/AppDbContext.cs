@@ -8,7 +8,6 @@ namespace HRBackend.Persistence
     public class AppDbContext : DbContext
     {
         public DbSet<User> Users { get; set; } 
-        public DbSet<Employees> Employees { get; set; }
         public DbSet<DictCountry> DictCountry { get; set; }
         public DbSet<Candidate> Candidates { get; set; } 
         public DbSet<PersonalInfo> PersonalInfo { get; set; } 
@@ -30,7 +29,6 @@ namespace HRBackend.Persistence
             modelBuilder.ApplyConfiguration(new CandidatesConfiguration());
             modelBuilder.ApplyConfiguration(new CheckConfiguration());
             modelBuilder.ApplyConfiguration(new DictCountryConfiguration());
-            modelBuilder.ApplyConfiguration(new EmployeesConfiguration());
             modelBuilder.ApplyConfiguration(new PersonalInfoConfiguration());
             modelBuilder.ApplyConfiguration(new UsersConfiguration());
             modelBuilder.ApplyConfiguration(new WorkingGroupConfiguration());

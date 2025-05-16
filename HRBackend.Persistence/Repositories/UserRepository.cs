@@ -1,4 +1,6 @@
-﻿using HRBackend.Domain.Entities;
+﻿
+
+using HRBackend.Domain.Entities;
 using HRBackend.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 

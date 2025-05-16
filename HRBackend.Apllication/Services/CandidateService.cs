@@ -21,22 +21,11 @@ public class CandidateService(IUserReposiotry userReposiotry,
 
             if (user == null)
                 throw new Exception("Пользователь не найден");
-
-            // Получаем рабочую группу и расписание работы (предполагается, что эти данные можно извлечь из request)
-            if (user.WorkingGroup == null)
-                throw new Exception("Рабочая группа не найдена");
-
-            // WorkSchedule нужно получать отдельно, так как это enum в User
-            var workSchedule = await WorkingGroupRepository.GetByIdAsync(request.WorkScheduleId);
-            if (workSchedule == null)
-                throw new Exception("Рабочее расписание не найдено");
-
             var newCandidate = new Candidate
             {
                 User = user,
-                WorkSchedule = workSchedule,       // Из отдельного репозитория
-                WorkingGroup = user.WorkingGroup, // Из включённых данных пользователя
-                StatusCandidata = (StatusCandidataEnum)request.StatusCandidataId,
+                WorkSchedule=request.WorkSchedule,       
+                Status = request.StatusCandidataId,
                 DateUp = DateTime.UtcNow
             };
 

@@ -45,11 +45,7 @@ namespace HRBackend.Persistence.EntityTypeConfigurations
                 .WithMany()
                 .HasForeignKey(u => u.WorkingGroupId)
                 .OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasOne(u => u.PersonalInfo)
-                .WithMany()
-                .HasForeignKey(u => u.PersonalInfoId)
-                .OnDelete(DeleteBehavior.Restrict);
+          
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using HRBackend.Application.DTO;
+using HRBackend.Domain.Enums;
 using MediatR;
 
 namespace HRBackend.Application.Request
@@ -13,9 +14,9 @@ namespace HRBackend.Application.Request
         public string SocialMedia { get; set; }
         public string Country { get; set; }
         public DateTime BirthDate { get; set; }
-        public int WorkScheduleId { get; set; }
+        public NameWorkScheduleEnum WorkSchedule { get; set; }
         public int WorkingGroupId { get; set; }
-        public int StatusCandidataId { get; set; }
+        public StatusCandidataEnum StatusCandidataId { get; set; }
         public int PersonalInfoId { get; set; }
         public int UserId { get; set; }
     }

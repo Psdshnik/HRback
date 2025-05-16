@@ -17,7 +17,7 @@ namespace HRBackend.Persistence.EntityTypeConfigurations
             builder.HasIndex(e => e.Id);
 
             // Добавляем конфигурацию для enum
-            builder.Property(e => e.StatusCandidat)
+            builder.Property(e => e.Status)
                 .HasColumnName("status")
                 .HasConversion<string>()
                 .HasMaxLength(20);

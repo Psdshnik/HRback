@@ -30,9 +30,8 @@ namespace HRBackend.Application.DTO
             Country = newCandidate.PersonalInfo?.Country?.Name ?? string.Empty;  // Проверяем на null, предполагается, что PersonalInfo имеет связь с DictCountry
             BirthDate = newCandidate.PersonalInfo?.DateAdd ?? DateTime.MinValue;  // Используем DateAdd или другое поле, если BirthDate не хранится в PersonalInfo
 
-            WorkSchedule = newCandidate.NameWorkSchedule.ToString();  // Преобразуем в строку, так как это enum
-            WorkingGroup = newCandidate.WorkingGroup?.Name ?? string.Empty;  // Проверяем на null
-            Status = newCandidate.StatusCandidat.ToString();  // Преобразуем в строку, так как это enum
+            WorkSchedule = newCandidate.WorkSchedule.ToString();  // Преобразуем в строку, так как это enum
+            Status = newCandidate.Status.ToString();  // Преобразуем в строку, так как это enum
         }
     }
 }
