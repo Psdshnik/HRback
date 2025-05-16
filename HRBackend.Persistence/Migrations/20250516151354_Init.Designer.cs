@@ -3,6 +3,7 @@ using System;
 using HRBackend.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HRBackend.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250516151354_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,24 +104,6 @@ namespace HRBackend.Persistence.Migrations
                     b.HasIndex("UserId1");
 
                     b.ToTable("check", (string)null);
-                });
-
-            modelBuilder.Entity("HRBackend.Domain.Entities.Checks.CheckEvent", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CheckId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CheckId");
-
-                    b.ToTable("CheckEvents");
                 });
 
             modelBuilder.Entity("HRBackend.Domain.Entities.DictCountry", b =>
@@ -311,17 +296,6 @@ namespace HRBackend.Persistence.Migrations
                         .HasForeignKey("UserId1");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("HRBackend.Domain.Entities.Checks.CheckEvent", b =>
-                {
-                    b.HasOne("Check", "Check")
-                        .WithMany()
-                        .HasForeignKey("CheckId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Check");
                 });
 
             modelBuilder.Entity("HRBackend.Domain.Entities.PersonalInfo", b =>

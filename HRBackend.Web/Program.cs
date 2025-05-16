@@ -1,45 +1,119 @@
 ﻿using AutoMapper;
 using HealthChecks.UI.Client;
-using HRBackend.Application.DTO;
-using HRBackend.Application.Interface;
-using HRBackend.Application.Mapping;
-using HRBackend.Application.Request;
 using HRBackend.Application.Services;
+using HRBackend.Domain.Repositories;
 using HRBackend.Persistence;
-using Microsoft.AspNetCore.Authentication;
+using HRBackend.Persistence.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Npgsql;
-using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 
-namespace HRBackend.Web
+var builder = WebApplication.CreateBuilder(args);
+builder.Logging.ClearProviders();
+
+ConfigureServices(
+services: builder.Services,
+configuration: builder.Configuration);
+
+builder.Host.UseDefaultServiceProvider((context, options) =>
 {
-    public class Program
+    options.ValidateOnBuild = context.HostingEnvironment.IsDevelopment();
+    options.ValidateScopes = context.HostingEnvironment.IsDevelopment();
+});
+
+var app = builder.Build();
+
+Configure(
+app: app,
+env: app.Environment);
+await app.RunAsync();
+
+
+void AddDbContext(IServiceCollection services, IConfiguration configuration)
+{
+    var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+    services.AddDbContext<AppDbContext>(options =>
     {
-        public static void Main(string[] args)
+        options.UseNpgsql(connectionString,
+        builder =>
         {
-            var builder = WebApplication.CreateBuilder(args);
+            var assembly = typeof(AppDbContext).Assembly.FullName;
+            builder.MigrationsAssembly(assembly);
+        });
 
-            // Добавление контроллеров и Swagger
-            builder.Services.AddControllersWithViews();
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(c =>
+        options.UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
+    });
+}
+void AddRepositories(IServiceCollection services)//репозитории scoped потому что должны быть созданы на каждый запрос свои
+{
+    services.AddScoped<IUserReposiotry, UserRepository>();
+    services.AddScoped<ICandidateRepository, CandidateRepository>();
+}
+void AddHttpClients(IServiceCollection services)
+{
+    services.AddHttpContextAccessor();
+}
+void AddAuth(IServiceCollection services, IConfiguration configuration)
+{
+    // Настройки JWT из конфигурации
+    var jwtSection = configuration.GetSection("JwtSettings");
+    var jwtKey = jwtSection["Secret"]!;
+    var jwtIssuer = jwtSection["Issuer"];
+    var jwtAudience = jwtSection["Audience"];
+
+    // Настройка аутентификации с использованием JWT
+    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
             {
-                // Настройка JWT для Swagger
-                c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-                {
-                    In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-                    Description = "Введите токен JWT",
-                    Name = "Authorization",
-                    Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer"
-                });
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = jwtIssuer,
+                ValidAudience = jwtAudience,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey)),
+                RoleClaimType = ClaimTypes.Role
+            };
+        });
 
-                c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+    services.AddAuthorization(); // Добавление авторизации
+}
+void AddServices(IServiceCollection services)//сервисы scoped потому что должны быть созданы на каждый запрос свои
+{
+    services.AddScoped<CandidateService>();
+    services.AddScoped<JwtService>();
+}
+void AddHealthChecks(IServiceCollection services)
+{
+    services.AddHealthChecks();
+    services.AddHealthChecksUI(options =>
+    {
+        options.SetEvaluationTimeInSeconds(15);
+        options.MaximumHistoryEntriesPerEndpoint(60);
+        options.AddHealthCheckEndpoint("HRBackend API", "/health");
+    }).AddInMemoryStorage();
+}
+void AddSwagger(IServiceCollection services)
+{
+    services.AddSwaggerGen(c =>
+    {
+        // Настройка JWT для Swagger
+        c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+        {
+            In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+            Description = "Введите токен JWT",
+            Name = "Authorization",
+            Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
+            Scheme = "Bearer"
+        });
+
+        c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
                 {
                     {
                         new Microsoft.OpenApi.Models.OpenApiSecurityScheme
@@ -53,108 +127,51 @@ namespace HRBackend.Web
                         new string[] { }
                     }
                 });
-            }); // Добавление Swagger
+    }); // Добавление Swagger
+}
+void ConfigureServices(IServiceCollection services, IConfiguration configuration)
+{
+    AddDbContext(services, configuration);
+    AddRepositories(services);
+    AddHttpClients(services);
+    AddServices(services);
+    AddHealthChecks(services);
+    AddAuth(services, configuration);
+    AddSwagger(services);
 
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
-            // Регистрация инфраструктуры (для работы с БД)
-            builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseNpgsql(connectionString)); // PostgreSQL подключение
-
-            // Настройки JWT из конфигурации
-            var jwtSection = builder.Configuration.GetSection("JwtSettings");
-            var jwtKey = jwtSection["Secret"]!;
-            var jwtIssuer = jwtSection["Issuer"];
-            var jwtAudience = jwtSection["Audience"];
-
-            // Настройка аутентификации с использованием JWT
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = jwtIssuer,
-                        ValidAudience = jwtAudience,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey)),
-                        RoleClaimType = ClaimTypes.Role
-                    };
-                });
-
-            builder.Services.AddAuthorization(); // Добавление авторизации
-
-            // Регистрация сервисов
-            //builder.Services.AddScoped<IUserService, UserService>();
-            builder.Services.AddScoped<IWorkingGroupService, WorkingGroupService>();
-            //builder.Services.AddScoped<ICandidateService, CandidateService>();
-
-            // Регистрация AutoMapper
-            builder.Services.AddAutoMapper(typeof(Program).Assembly); // Добавьте AutoMapper здесь
-
-            // Добавление HttpContextAccessor
-            builder.Services.AddHttpContextAccessor();
-
-            // Регистрация Health Check и проверка состояния PostgreSQL
-            builder.Services.AddHealthChecks()
-                .AddNpgSql(connectionString, name: "PostgreSQL", timeout: TimeSpan.FromSeconds(5));
-
-            builder.Services.AddHealthChecksUI(options =>
-            {
-                options.SetEvaluationTimeInSeconds(15);
-                options.MaximumHistoryEntriesPerEndpoint(60);
-                options.AddHealthCheckEndpoint("HRBackend API", "/health");
-            }).AddInMemoryStorage();
-
-            var app = builder.Build();
-
-            // Middleware
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Error");
-                app.UseHsts();
-            }
-
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseRouting();
-
-            // Swagger
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "HRBackend API V1");
-                    c.RoutePrefix = "swagger";  // UI будет доступен по /swagger
-                });
-            }
-
-            // Аутентификация и авторизация
-            app.UseAuthentication();
-            app.UseAuthorization();
-
-            // Health Check endpoints
-            app.UseHealthChecks("/health", new HealthCheckOptions
-            {
-                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-            });
-
-            app.UseHealthChecksUI(options =>
-            {
-                options.UIPath = "/health-ui"; // UI доступен по /health-ui
-            });
-
-            // Контроллеры
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
-
-            app.Run();
-
-            Console.WriteLine("Подключение к PostgreSQL успешно настроено.");
-        }
+    services.AddAutoMapper(typeof(Program).Assembly);
+    services.AddControllersWithViews();
+    services.AddEndpointsApiExplorer();
+}
+void Configure(WebApplication app, IWebHostEnvironment env)
+{
+    if (env.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "HRBackend API V1");
+            c.RoutePrefix = "swagger";  // UI будет доступен по /swagger
+        });
     }
+    app.UseHttpsRedirection();
+    app.UseStaticFiles();
+    app.UseRouting();
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    app.UseHealthChecks("/health", new HealthCheckOptions
+    {
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+    });
+
+    app.UseHealthChecksUI(options =>
+    {
+        options.UIPath = "/health-ui"; // UI доступен по /health-ui
+    });
+
+    app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
 }

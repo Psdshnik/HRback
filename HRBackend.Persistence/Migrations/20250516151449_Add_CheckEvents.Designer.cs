@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HRBackend.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250513110319_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250516151449_Add_CheckEvents")]
+    partial class Add_CheckEvents
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,11 +23,6 @@ namespace HRBackend.Persistence.Migrations
                 .HasAnnotation("ProductVersion", "8.0.15")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "name_socail_enum", new[] { "instagram", "linked_in", "face_book", "vk" });
-            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "name_work_schedule_enum", new[] { "office", "hybrid", "home" });
-            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "status_candidata_enum", new[] { "at_work", "offer", "accepted", "rejected", "under_review", "interview", "test_assignment" });
-            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "type_event_enum", new[] { "candidat", "employes" });
-            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "user_roles_enum", new[] { "admin", "hr" });
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Candidate", b =>
@@ -41,13 +36,10 @@ namespace HRBackend.Persistence.Migrations
                     b.Property<DateTime>("DateUp")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("NameWorkSchedule")
-                        .HasColumnType("integer");
-
                     b.Property<int>("PersonalInfoId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("StatusCandidat")
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)")
@@ -56,8 +48,8 @@ namespace HRBackend.Persistence.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("WorkingGroupId")
-                        .HasColumnType("int");
+                    b.Property<int>("WorkSchedule")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id")
                         .HasName("PK_candidates");
@@ -66,7 +58,7 @@ namespace HRBackend.Persistence.Migrations
 
                     b.HasIndex("PersonalInfoId");
 
-                    b.HasIndex("WorkingGroupId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("candidates", (string)null);
                 });
@@ -78,6 +70,9 @@ namespace HRBackend.Persistence.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CheckId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("CreatedId")
                         .HasColumnType("integer");
@@ -96,12 +91,37 @@ namespace HRBackend.Persistence.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id")
                         .HasName("pk_check");
 
+                    b.HasIndex("CheckId");
+
                     b.HasIndex("UserId");
 
+                    b.HasIndex("UserId1");
+
                     b.ToTable("check", (string)null);
+                });
+
+            modelBuilder.Entity("HRBackend.Domain.Entities.Checks.CheckEvent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CheckId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CheckId");
+
+                    b.ToTable("CheckEvents");
                 });
 
             modelBuilder.Entity("HRBackend.Domain.Entities.DictCountry", b =>
@@ -120,39 +140,6 @@ namespace HRBackend.Persistence.Migrations
                         .HasName("pk_country");
 
                     b.ToTable("dict_country", (string)null);
-                });
-
-            modelBuilder.Entity("HRBackend.Domain.Entities.Employees", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("DateAdd")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp")
-                        .HasColumnName("date_add")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                    b.Property<string>("NameWorkSchedule")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)")
-                        .HasColumnName("work_schedule");
-
-                    b.Property<int>("PersonalInfoId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id")
-                        .HasName("PK_emploees");
-
-                    b.HasIndex("Id");
-
-                    b.HasIndex("PersonalInfoId");
-
-                    b.ToTable("employees", (string)null);
                 });
 
             modelBuilder.Entity("HRBackend.Domain.Entities.PersonalInfo", b =>
@@ -244,9 +231,6 @@ namespace HRBackend.Persistence.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("password");
 
-                    b.Property<int>("PersonalInfoId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Role")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -256,14 +240,17 @@ namespace HRBackend.Persistence.Migrations
                     b.Property<int>("WorkingGroupId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("WorkingGroupId1")
+                        .HasColumnType("int");
+
                     b.HasKey("Id")
                         .HasName("pk_users");
 
                     b.HasIndex("Id");
 
-                    b.HasIndex("PersonalInfoId");
-
                     b.HasIndex("WorkingGroupId");
+
+                    b.HasIndex("WorkingGroupId1");
 
                     b.ToTable("users", (string)null);
                 });
@@ -299,37 +286,45 @@ namespace HRBackend.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HRBackend.Domain.Entities.WorkingGroup", "WorkingGroup")
-                        .WithMany()
-                        .HasForeignKey("WorkingGroupId")
+                    b.HasOne("HRBackend.Domain.Entities.User", "User")
+                        .WithMany("Candidates")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("PersonalInfo");
 
-                    b.Navigation("WorkingGroup");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Check", b =>
                 {
+                    b.HasOne("Check", null)
+                        .WithMany("Checks")
+                        .HasForeignKey("CheckId");
+
                     b.HasOne("HRBackend.Domain.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("HRBackend.Domain.Entities.User", null)
+                        .WithMany("Checks")
+                        .HasForeignKey("UserId1");
+
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("HRBackend.Domain.Entities.Employees", b =>
+            modelBuilder.Entity("HRBackend.Domain.Entities.Checks.CheckEvent", b =>
                 {
-                    b.HasOne("HRBackend.Domain.Entities.PersonalInfo", "PersonalInfo")
+                    b.HasOne("Check", "Check")
                         .WithMany()
-                        .HasForeignKey("PersonalInfoId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasForeignKey("CheckId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("PersonalInfo");
+                    b.Navigation("Check");
                 });
 
             modelBuilder.Entity("HRBackend.Domain.Entities.PersonalInfo", b =>
@@ -345,21 +340,34 @@ namespace HRBackend.Persistence.Migrations
 
             modelBuilder.Entity("HRBackend.Domain.Entities.User", b =>
                 {
-                    b.HasOne("HRBackend.Domain.Entities.PersonalInfo", "PersonalInfo")
-                        .WithMany()
-                        .HasForeignKey("PersonalInfoId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("HRBackend.Domain.Entities.WorkingGroup", "WorkingGroup")
                         .WithMany()
                         .HasForeignKey("WorkingGroupId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("PersonalInfo");
+                    b.HasOne("HRBackend.Domain.Entities.WorkingGroup", null)
+                        .WithMany("Users")
+                        .HasForeignKey("WorkingGroupId1");
 
                     b.Navigation("WorkingGroup");
+                });
+
+            modelBuilder.Entity("Check", b =>
+                {
+                    b.Navigation("Checks");
+                });
+
+            modelBuilder.Entity("HRBackend.Domain.Entities.User", b =>
+                {
+                    b.Navigation("Candidates");
+
+                    b.Navigation("Checks");
+                });
+
+            modelBuilder.Entity("HRBackend.Domain.Entities.WorkingGroup", b =>
+                {
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

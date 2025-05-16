@@ -2,6 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using HRBackend.Persistence.EntityTypeConfigurations;
 using HRBackend.Domain.Enums;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Options;
+using System.Reflection;
+using HRBackend.Domain.Entities.Checks;
 
 namespace HRBackend.Persistence
 {
@@ -13,27 +17,27 @@ namespace HRBackend.Persistence
         public DbSet<PersonalInfo> PersonalInfo { get; set; } 
         public DbSet<WorkingGroup> WorkGroups { get; set; } 
         public DbSet<Check> Checks { get; set; } 
+        public DbSet<CheckEvent> CheckEvents { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) 
             : base(options) {}
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+#if DEBUG
+            optionsBuilder.EnableSensitiveDataLogging();
+            optionsBuilder.EnableDetailedErrors();
+            optionsBuilder.LogTo(log =>
+            {
+                Console.WriteLine($"{log}{Environment.NewLine}");
+            }, new[] { RelationalEventId.CommandExecuted });
+#endif
+            base.OnConfiguring(optionsBuilder);
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Регистрация enum-типов PostgreSQL
-            modelBuilder.HasPostgresEnum<NameSocailEnum>();
-            modelBuilder.HasPostgresEnum<NameWorkScheduleEnum>();
-            modelBuilder.HasPostgresEnum<StatusCandidataEnum>();
-            modelBuilder.HasPostgresEnum<TypeEventEnum>();
-            modelBuilder.HasPostgresEnum<UserRolesEnum>();
-
-            modelBuilder.ApplyConfiguration(new CandidatesConfiguration());
-            modelBuilder.ApplyConfiguration(new CheckConfiguration());
-            modelBuilder.ApplyConfiguration(new DictCountryConfiguration());
-            modelBuilder.ApplyConfiguration(new PersonalInfoConfiguration());
-            modelBuilder.ApplyConfiguration(new UsersConfiguration());
-            modelBuilder.ApplyConfiguration(new WorkingGroupConfiguration());
-
             base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }

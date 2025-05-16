@@ -7,18 +7,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HRBackend.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterDatabase()
-                .Annotation("Npgsql:Enum:name_socail_enum", "instagram,linked_in,face_book,vk")
-                .Annotation("Npgsql:Enum:name_work_schedule_enum", "office,hybrid,home")
-                .Annotation("Npgsql:Enum:status_candidata_enum", "at_work,offer,accepted,rejected,under_review,interview,test_assignment")
-                .Annotation("Npgsql:Enum:type_event_enum", "candidat,employes")
-                .Annotation("Npgsql:Enum:user_roles_enum", "admin,hr");
-
             migrationBuilder.CreateTable(
                 name: "dict_country",
                 columns: table => new
@@ -72,17 +65,45 @@ namespace HRBackend.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    login = table.Column<string>(type: "varchar(55)", maxLength: 55, nullable: false),
+                    password = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false),
+                    WorkingGroupId = table.Column<int>(type: "int", nullable: false),
+                    work_schedule = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    role = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    WorkingGroupId1 = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_users_working_groups_WorkingGroupId",
+                        column: x => x.WorkingGroupId,
+                        principalTable: "working_groups",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_users_working_groups_WorkingGroupId1",
+                        column: x => x.WorkingGroupId1,
+                        principalTable: "working_groups",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "candidates",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DateUp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UserId = table.Column<int>(type: "integer", nullable: false),
-                    WorkingGroupId = table.Column<int>(type: "int", nullable: false),
-                    PersonalInfoId = table.Column<int>(type: "integer", nullable: false),
                     status = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    NameWorkSchedule = table.Column<int>(type: "integer", nullable: false)
+                    WorkSchedule = table.Column<int>(type: "integer", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    PersonalInfoId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -94,62 +115,11 @@ namespace HRBackend.Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_candidates_working_groups_WorkingGroupId",
-                        column: x => x.WorkingGroupId,
-                        principalTable: "working_groups",
-                        principalColumn: "id",
+                        name: "FK_candidates_users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "users",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "employees",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    date_add = table.Column<DateTime>(type: "timestamp", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
-                    PersonalInfoId = table.Column<int>(type: "integer", nullable: false),
-                    work_schedule = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_emploees", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_employees_personal_info_PersonalInfoId",
-                        column: x => x.PersonalInfoId,
-                        principalTable: "personal_info",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "users",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    login = table.Column<string>(type: "varchar(55)", maxLength: 55, nullable: false),
-                    password = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false),
-                    WorkingGroupId = table.Column<int>(type: "int", nullable: false),
-                    PersonalInfoId = table.Column<int>(type: "integer", nullable: false),
-                    work_schedule = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    role = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_users", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_users_personal_info_PersonalInfoId",
-                        column: x => x.PersonalInfoId,
-                        principalTable: "personal_info",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_users_working_groups_WorkingGroupId",
-                        column: x => x.WorkingGroupId,
-                        principalTable: "working_groups",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -161,17 +131,29 @@ namespace HRBackend.Persistence.Migrations
                     date_check = table.Column<DateTime>(type: "timestamp", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
                     CreatedId = table.Column<int>(type: "integer", nullable: false),
                     @event = table.Column<string>(name: "event", type: "text", nullable: false),
-                    UserId = table.Column<int>(type: "integer", nullable: false)
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    CheckId = table.Column<int>(type: "integer", nullable: true),
+                    UserId1 = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_check", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_check_check_CheckId",
+                        column: x => x.CheckId,
+                        principalTable: "check",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_check_users_UserId",
                         column: x => x.UserId,
                         principalTable: "users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_check_users_UserId1",
+                        column: x => x.UserId1,
+                        principalTable: "users",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -185,9 +167,14 @@ namespace HRBackend.Persistence.Migrations
                 column: "PersonalInfoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_candidates_WorkingGroupId",
+                name: "IX_candidates_UserId",
                 table: "candidates",
-                column: "WorkingGroupId");
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_check_CheckId",
+                table: "check",
+                column: "CheckId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_check_UserId",
@@ -195,14 +182,9 @@ namespace HRBackend.Persistence.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_employees_Id",
-                table: "employees",
-                column: "Id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_employees_PersonalInfoId",
-                table: "employees",
-                column: "PersonalInfoId");
+                name: "IX_check_UserId1",
+                table: "check",
+                column: "UserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_personal_info_CountryId",
@@ -220,14 +202,14 @@ namespace HRBackend.Persistence.Migrations
                 column: "Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_users_PersonalInfoId",
-                table: "users",
-                column: "PersonalInfoId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_users_WorkingGroupId",
                 table: "users",
                 column: "WorkingGroupId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_users_WorkingGroupId1",
+                table: "users",
+                column: "WorkingGroupId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_working_groups_id",
@@ -245,19 +227,16 @@ namespace HRBackend.Persistence.Migrations
                 name: "check");
 
             migrationBuilder.DropTable(
-                name: "employees");
+                name: "personal_info");
 
             migrationBuilder.DropTable(
                 name: "users");
 
             migrationBuilder.DropTable(
-                name: "personal_info");
+                name: "dict_country");
 
             migrationBuilder.DropTable(
                 name: "working_groups");
-
-            migrationBuilder.DropTable(
-                name: "dict_country");
         }
     }
 }

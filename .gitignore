@@ -12,8 +12,8 @@ HRBackend.Web/obj
 HRBackend/bin
 HRBackend/obj
 
-HRBackend.Persistence/obj
+HRBackend.Apllication/obj
 HRBackend.Apllication/obj
 
-HRBackend.Apllication\bin
-HRBackend.Apllication\bin
+HRBackend.Persistence/bin
+HRBackend.Persistence/bin
