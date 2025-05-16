@@ -9,7 +9,6 @@ namespace HRBackend.Application.Services
 {
 public class CandidateService(IUserReposiotry userReposiotry,
       ICandidateRepository candidateRepository,
-      IWorkScheduleRepository WorkingGroupRepository,
       IUnitOfWork unitOfWork) : ICandidateService
   {
 

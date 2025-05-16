@@ -52,6 +52,7 @@ void AddRepositories(IServiceCollection services)//репозитории scoped
 {
     services.AddScoped<IUserReposiotry, UserRepository>();
     services.AddScoped<ICandidateRepository, CandidateRepository>();
+    services.AddScoped<IUnitOfWork, UnitOfWork>();
 }
 void AddHttpClients(IServiceCollection services)
 {
