@@ -7,5 +7,7 @@ public class Check
     public int CreatedId { get; set; } // HR который делает проверку
     public string Event { get; set; }
     public int UserId { get; set; } // Пользователь которого проверяют 
-    public User User { get; set; }
+    public User User { get; set; } = null!;
+
+    public ICollection<Check> Checks { get; set; }=new List<Check>();
 }

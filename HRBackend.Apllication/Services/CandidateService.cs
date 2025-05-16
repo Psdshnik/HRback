@@ -49,6 +49,11 @@ public class CandidateService(IUserReposiotry userReposiotry,
             // Возвращаем DTO с данными кандидата
             return new CandidateDTO(newCandidate);
         }
+
+        public Task<CandidateDTO> UpdateCandidateAsync(CandidateUpdateRequest request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     // Метод редактирования кандидата
