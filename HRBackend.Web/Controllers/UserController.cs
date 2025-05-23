@@ -55,6 +55,11 @@ namespace HRBackend.Web.Controllers
                 // Получаем DTO пользователя напрямую
                 UserDTO userDTO = await _userService.AuthenticateUserAsync(request.Login, request.Password, cancellationToken);
 
+                if (userDTO == null)
+                {
+                    return BadRequest("Неверные данные для авторизации");
+                }
+
                 var accessToken = _jwtService.GenerateAccessToken(userDTO.Id, userDTO.Login, userDTO.Role);
                 var refreshToken = _jwtService.GenerateRefreshToken();
 

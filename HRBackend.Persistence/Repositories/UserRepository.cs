@@ -19,7 +19,7 @@ namespace HRBackend.Persistence.Repositories
             .FirstOrDefaultAsync(x => x.Id == id);
 
         public async Task<User?> GetByAdPass(string ad, string password) => await dbContext.Users
-                        .Include(x=>x.NameWorkSchedule)
+            .Include(x=>x.NameWorkSchedule)
             .Include(x=>x.WorkingGroup)
         .FirstOrDefaultAsync(x => x.Login == ad && x.Password == password);
     }

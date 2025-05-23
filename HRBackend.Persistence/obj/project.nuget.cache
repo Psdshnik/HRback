@@ -1,183 +1,67 @@
 {
   "version": 2,
   "dgSpecHash": "wfMNsD7Sc/M=",
-  "success": false,
+  "success": true,
   "projectFilePath": "C:\\Kurs\\HRback\\HRBackend.Persistence\\HRBackend.Persistence.csproj",
-  "expectedPackageFiles": [],
-  "logs": [
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.EntityFrameworkCore.Design\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.EntityFrameworkCore.Design'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.EntityFrameworkCore.Design"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.EntityFrameworkCore.Design\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.EntityFrameworkCore.Design'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.EntityFrameworkCore.Design"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Configuration.FileExtensions\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Configuration.FileExtensions'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.Extensions.Configuration.FileExtensions"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Configuration.FileExtensions\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Configuration.FileExtensions'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.Extensions.Configuration.FileExtensions"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Configuration\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Configuration'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.Extensions.Configuration"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Configuration\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Configuration'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.Extensions.Configuration"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.EntityFrameworkCore\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.EntityFrameworkCore'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.EntityFrameworkCore"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Configuration.Json\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Configuration.Json'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.Extensions.Configuration.Json"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.EntityFrameworkCore\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.EntityFrameworkCore'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.EntityFrameworkCore"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Configuration.Json\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Configuration.Json'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.Extensions.Configuration.Json"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Npgsql.EntityFrameworkCore.PostgreSQL\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Npgsql.EntityFrameworkCore.PostgreSQL'&semVerLevel=2.0.0\".",
-      "libraryId": "Npgsql.EntityFrameworkCore.PostgreSQL"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Npgsql.EntityFrameworkCore.PostgreSQL\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Npgsql.EntityFrameworkCore.PostgreSQL'&semVerLevel=2.0.0\".",
-      "libraryId": "Npgsql.EntityFrameworkCore.PostgreSQL"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.EntityFrameworkCore.Tools\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.EntityFrameworkCore.Tools'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.EntityFrameworkCore.Tools"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.EntityFrameworkCore.Tools\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.EntityFrameworkCore.Tools'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.EntityFrameworkCore.Tools"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.EntityFrameworkCore.Analyzers\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.EntityFrameworkCore.Analyzers'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.EntityFrameworkCore.Analyzers"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.EntityFrameworkCore.Analyzers\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.EntityFrameworkCore.Analyzers'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.EntityFrameworkCore.Analyzers"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Logging\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Logging'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.Extensions.Logging"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Logging\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Logging'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.Extensions.Logging"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Caching.Memory\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Caching.Memory'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.Extensions.Caching.Memory"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Caching.Memory\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Caching.Memory'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.Extensions.Caching.Memory"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.EntityFrameworkCore.Abstractions\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.EntityFrameworkCore.Abstractions'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.EntityFrameworkCore.Abstractions"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.EntityFrameworkCore.Abstractions\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.EntityFrameworkCore.Abstractions'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.EntityFrameworkCore.Abstractions"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Options\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Options'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.Extensions.Options"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Options\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Options'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.Extensions.Options"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Logging.Abstractions\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Logging.Abstractions'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.Extensions.Logging.Abstractions"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Logging.Abstractions\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Logging.Abstractions'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.Extensions.Logging.Abstractions"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.DependencyInjection.Abstractions\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.DependencyInjection.Abstractions'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.Extensions.DependencyInjection.Abstractions"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Caching.Abstractions\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Caching.Abstractions'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.Extensions.Caching.Abstractions"
-    },
-    {
-      "code": "NU1301",
-      "level": "Error",
-      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Caching.Abstractions\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Caching.Abstractions'&semVerLevel=2.0.0\".",
-      "libraryId": "Microsoft.Extensions.Caching.Abstractions"
-    }
-  ]
+  "expectedPackageFiles": [
+    "C:\\Users\\lobko.k\\.nuget\\packages\\automapper\\10.1.0\\automapper.10.1.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.0\\automapper.extensions.microsoft.dependencyinjection.8.1.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\mediatr\\8.1.0\\mediatr.8.1.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\8.1.0\\mediatr.extensions.microsoft.dependencyinjection.8.1.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.3.3\\microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.codeanalysis.common\\4.5.0\\microsoft.codeanalysis.common.4.5.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.codeanalysis.csharp\\4.5.0\\microsoft.codeanalysis.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.codeanalysis.csharp.workspaces\\4.5.0\\microsoft.codeanalysis.csharp.workspaces.4.5.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.codeanalysis.workspaces.common\\4.5.0\\microsoft.codeanalysis.workspaces.common.4.5.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.15\\microsoft.entityframeworkcore.8.0.15.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.15\\microsoft.entityframeworkcore.abstractions.8.0.15.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\8.0.15\\microsoft.entityframeworkcore.analyzers.8.0.15.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.entityframeworkcore.design\\8.0.15\\microsoft.entityframeworkcore.design.8.0.15.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\8.0.15\\microsoft.entityframeworkcore.relational.8.0.15.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.15\\microsoft.entityframeworkcore.tools.8.0.15.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\8.0.0\\microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.extensions.caching.memory\\8.0.1\\microsoft.extensions.caching.memory.8.0.1.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.extensions.configuration\\8.0.0\\microsoft.extensions.configuration.8.0.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.extensions.configuration.fileextensions\\8.0.0\\microsoft.extensions.configuration.fileextensions.8.0.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.extensions.configuration.json\\8.0.0\\microsoft.extensions.configuration.json.8.0.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.1\\microsoft.extensions.dependencyinjection.8.0.1.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.2\\microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.extensions.dependencymodel\\8.0.2\\microsoft.extensions.dependencymodel.8.0.2.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\8.0.0\\microsoft.extensions.fileproviders.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.extensions.fileproviders.physical\\8.0.0\\microsoft.extensions.fileproviders.physical.8.0.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\8.0.0\\microsoft.extensions.filesystemglobbing.8.0.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.extensions.logging\\8.0.1\\microsoft.extensions.logging.8.0.1.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.2\\microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.extensions.options\\8.0.2\\microsoft.extensions.options.8.0.2.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.identitymodel.abstractions\\8.0.1\\microsoft.identitymodel.abstractions.8.0.1.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\8.0.1\\microsoft.identitymodel.jsonwebtokens.8.0.1.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.identitymodel.logging\\8.0.1\\microsoft.identitymodel.logging.8.0.1.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\microsoft.identitymodel.tokens\\8.0.1\\microsoft.identitymodel.tokens.8.0.1.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\npgsql\\8.0.6\\npgsql.8.0.6.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\8.0.11\\npgsql.entityframeworkcore.postgresql.8.0.11.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\system.composition\\6.0.0\\system.composition.6.0.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\system.composition.attributedmodel\\6.0.0\\system.composition.attributedmodel.6.0.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\system.composition.convention\\6.0.0\\system.composition.convention.6.0.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\system.composition.hosting\\6.0.0\\system.composition.hosting.6.0.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\system.composition.runtime\\6.0.0\\system.composition.runtime.6.0.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\system.composition.typedparts\\6.0.0\\system.composition.typedparts.6.0.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.0.1\\system.identitymodel.tokens.jwt.8.0.1.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\system.io.pipelines\\6.0.3\\system.io.pipelines.6.0.3.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\system.reflection.metadata\\6.0.1\\system.reflection.metadata.6.0.1.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512",
+    "C:\\Users\\lobko.k\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
 }
