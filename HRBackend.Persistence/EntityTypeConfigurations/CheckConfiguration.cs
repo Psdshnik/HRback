@@ -26,7 +26,7 @@ namespace HRBackend.Persistence.EntityTypeConfigurations
 
             // Добавляем связи
             builder.HasOne(c => c.User)
-                .WithMany()
+                .WithMany(u => u.Checks)
                 .HasForeignKey(c => c.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
         }

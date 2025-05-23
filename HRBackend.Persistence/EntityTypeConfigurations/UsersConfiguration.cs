@@ -42,10 +42,9 @@ namespace HRBackend.Persistence.EntityTypeConfigurations
 
             // Добавляем связи
             builder.HasOne(u => u.WorkingGroup)
-                .WithMany()
+                .WithMany(wg => wg.Users)
                 .HasForeignKey(u => u.WorkingGroupId)
                 .OnDelete(DeleteBehavior.Restrict);
-          
         }
     }
 }

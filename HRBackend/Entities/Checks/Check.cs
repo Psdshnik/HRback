@@ -1,4 +1,5 @@
 ﻿using HRBackend.Domain.Entities;
+using HRBackend.Domain.Entities.Checks;
 
 public class Check
 {
@@ -8,6 +9,5 @@ public class Check
     public string Event { get; set; }
     public int UserId { get; set; } // Пользователь которого проверяют 
     public User User { get; set; } = null!;
-
-    public ICollection<Check> Checks { get; set; }=new List<Check>();
+    public ICollection<CheckEvent> CheckEvent { get; set; }=new List<CheckEvent>();
 }

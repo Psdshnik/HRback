@@ -1,0 +1,305 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0": {}
+  },
+  "libraries": {},
+  "projectFileDependencyGroups": {
+    "net8.0": [
+      "Microsoft.EntityFrameworkCore >= 8.0.15",
+      "Microsoft.EntityFrameworkCore.Design >= 8.0.15",
+      "Microsoft.EntityFrameworkCore.Tools >= 8.0.15",
+      "Microsoft.Extensions.Configuration >= 8.0.0",
+      "Microsoft.Extensions.Configuration.FileExtensions >= 8.0.0",
+      "Microsoft.Extensions.Configuration.Json >= 8.0.0",
+      "Npgsql.EntityFrameworkCore.PostgreSQL >= 8.0.11"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\lobko.k\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Kurs\\HRback\\HRBackend.Persistence\\HRBackend.Persistence.csproj",
+      "projectName": "HRBackend.Persistence",
+      "projectPath": "C:\\Kurs\\HRback\\HRBackend.Persistence\\HRBackend.Persistence.csproj",
+      "packagesPath": "C:\\Users\\lobko.k\\.nuget\\packages\\",
+      "outputPath": "C:\\Kurs\\HRback\\HRBackend.Persistence\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\lobko.k\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://ams-nexus2.xbet.lan/repository/nuget-global/": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "projectReferences": {
+            "C:\\Kurs\\HRback\\HRBackend.Apllication\\HRBackend.Apllication.csproj": {
+              "projectPath": "C:\\Kurs\\HRback\\HRBackend.Apllication\\HRBackend.Apllication.csproj"
+            },
+            "C:\\Kurs\\HRback\\HRBackend\\HRBackend.Domain.csproj": {
+              "projectPath": "C:\\Kurs\\HRback\\HRBackend\\HRBackend.Domain.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      }
+    },
+    "frameworks": {
+      "net8.0": {
+        "targetAlias": "net8.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[8.0.15, )"
+          },
+          "Microsoft.EntityFrameworkCore.Design": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[8.0.15, )"
+          },
+          "Microsoft.EntityFrameworkCore.Tools": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[8.0.15, )"
+          },
+          "Microsoft.Extensions.Configuration": {
+            "target": "Package",
+            "version": "[8.0.0, )"
+          },
+          "Microsoft.Extensions.Configuration.FileExtensions": {
+            "target": "Package",
+            "version": "[8.0.0, )"
+          },
+          "Microsoft.Extensions.Configuration.Json": {
+            "target": "Package",
+            "version": "[8.0.0, )"
+          },
+          "Npgsql.EntityFrameworkCore.PostgreSQL": {
+            "target": "Package",
+            "version": "[8.0.11, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  },
+  "logs": [
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.EntityFrameworkCore.Design\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.EntityFrameworkCore.Design'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.EntityFrameworkCore.Design"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.EntityFrameworkCore.Design\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.EntityFrameworkCore.Design'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.EntityFrameworkCore.Design"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Configuration.FileExtensions\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Configuration.FileExtensions'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.Extensions.Configuration.FileExtensions"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Configuration.FileExtensions\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Configuration.FileExtensions'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.Extensions.Configuration.FileExtensions"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Configuration\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Configuration'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.Extensions.Configuration"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Configuration\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Configuration'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.Extensions.Configuration"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.EntityFrameworkCore\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.EntityFrameworkCore'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.EntityFrameworkCore"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Configuration.Json\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Configuration.Json'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.Extensions.Configuration.Json"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.EntityFrameworkCore\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.EntityFrameworkCore'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.EntityFrameworkCore"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Configuration.Json\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Configuration.Json'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.Extensions.Configuration.Json"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Npgsql.EntityFrameworkCore.PostgreSQL\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Npgsql.EntityFrameworkCore.PostgreSQL'&semVerLevel=2.0.0\".",
+      "libraryId": "Npgsql.EntityFrameworkCore.PostgreSQL"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Npgsql.EntityFrameworkCore.PostgreSQL\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Npgsql.EntityFrameworkCore.PostgreSQL'&semVerLevel=2.0.0\".",
+      "libraryId": "Npgsql.EntityFrameworkCore.PostgreSQL"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.EntityFrameworkCore.Tools\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.EntityFrameworkCore.Tools'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.EntityFrameworkCore.Tools"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.EntityFrameworkCore.Tools\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.EntityFrameworkCore.Tools'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.EntityFrameworkCore.Tools"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.EntityFrameworkCore.Analyzers\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.EntityFrameworkCore.Analyzers'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.EntityFrameworkCore.Analyzers"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.EntityFrameworkCore.Analyzers\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.EntityFrameworkCore.Analyzers'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.EntityFrameworkCore.Analyzers"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Logging\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Logging'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.Extensions.Logging"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Logging\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Logging'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.Extensions.Logging"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Caching.Memory\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Caching.Memory'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.Extensions.Caching.Memory"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Caching.Memory\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Caching.Memory'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.Extensions.Caching.Memory"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.EntityFrameworkCore.Abstractions\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.EntityFrameworkCore.Abstractions'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.EntityFrameworkCore.Abstractions"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.EntityFrameworkCore.Abstractions\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.EntityFrameworkCore.Abstractions'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.EntityFrameworkCore.Abstractions"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Options\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Options'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.Extensions.Options"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Options\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Options'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.Extensions.Options"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Logging.Abstractions\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Logging.Abstractions'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.Extensions.Logging.Abstractions"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Logging.Abstractions\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Logging.Abstractions'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.Extensions.Logging.Abstractions"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.DependencyInjection.Abstractions\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.DependencyInjection.Abstractions'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.Extensions.DependencyInjection.Abstractions"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Caching.Abstractions\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Caching.Abstractions'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.Extensions.Caching.Abstractions"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Не удалось извлечь данные о \"Microsoft.Extensions.Caching.Abstractions\" из удаленного источника \"https://ams-nexus2.xbet.lan/repository/nuget-global/FindPackagesById()?id='Microsoft.Extensions.Caching.Abstractions'&semVerLevel=2.0.0\".",
+      "libraryId": "Microsoft.Extensions.Caching.Abstractions"
+    }
+  ]
+}

@@ -1,6 +1,4 @@
-﻿
-
-using HRBackend.Domain.Entities;
+﻿using HRBackend.Domain.Entities;
 using HRBackend.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,5 +17,10 @@ namespace HRBackend.Persistence.Repositories
             .Include(x=>x.NameWorkSchedule)
             .Include(x=>x.WorkingGroup)
             .FirstOrDefaultAsync(x => x.Id == id);
+
+        public async Task<User?> GetByAdPass(string ad, string password) => await dbContext.Users
+                        .Include(x=>x.NameWorkSchedule)
+            .Include(x=>x.WorkingGroup)
+        .FirstOrDefaultAsync(x => x.Login == ad && x.Password == password);
     }
 }

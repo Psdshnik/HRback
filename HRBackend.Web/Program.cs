@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HealthChecks.UI.Client;
+using HRBackend.Application.Interface;
 using HRBackend.Application.Services;
 using HRBackend.Domain.Repositories;
 using HRBackend.Persistence;
@@ -89,6 +90,7 @@ void AddServices(IServiceCollection services)//сервисы scoped потом�
 {
     services.AddScoped<CandidateService>();
     services.AddScoped<JwtService>();
+    services.AddScoped<IUserService, UserService>();
 }
 void AddHealthChecks(IServiceCollection services)
 {

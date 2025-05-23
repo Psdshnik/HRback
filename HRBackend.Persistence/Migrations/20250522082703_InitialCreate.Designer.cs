@@ -3,6 +3,7 @@ using System;
 using HRBackend.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HRBackend.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250522082703_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -227,12 +230,17 @@ namespace HRBackend.Persistence.Migrations
                     b.Property<int>("WorkingGroupId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("WorkingGroupId1")
+                        .HasColumnType("int");
+
                     b.HasKey("Id")
                         .HasName("pk_users");
 
                     b.HasIndex("Id");
 
                     b.HasIndex("WorkingGroupId");
+
+                    b.HasIndex("WorkingGroupId1");
 
                     b.ToTable("users", (string)null);
                 });
@@ -315,10 +323,14 @@ namespace HRBackend.Persistence.Migrations
             modelBuilder.Entity("HRBackend.Domain.Entities.User", b =>
                 {
                     b.HasOne("HRBackend.Domain.Entities.WorkingGroup", "WorkingGroup")
-                        .WithMany("Users")
+                        .WithMany()
                         .HasForeignKey("WorkingGroupId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("HRBackend.Domain.Entities.WorkingGroup", null)
+                        .WithMany("Users")
+                        .HasForeignKey("WorkingGroupId1");
 
                     b.Navigation("WorkingGroup");
                 });
