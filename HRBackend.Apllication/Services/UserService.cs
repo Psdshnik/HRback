@@ -4,21 +4,16 @@ using HRBackend.Application.Request;
 using HRBackend.Domain.Entities;
 using HRBackend.Domain.Enums;
 using HRBackend.Domain.Repositories;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace HRBackend.Application.Services
 {
-    public class UserService(IUserReposiotry userReposiotry,
+    public class UserService(IUserReposiotry UserRepository,
     IUnitOfWork unitOfWork) : IUserService
     {
-        
 
-
-        /*private async Task<bool> IsUserExistAsync(string login, CancellationToken cancellationToken)
+        private async Task<bool> IsUserExistAsync(string login, CancellationToken cancellationToken)
         {
-            var existingUser = await _userRepository.GetByAd(login); // Используем существующий метод GetByAd
+            var existingUser = await UserRepository.GetByAd(login); // Используем существующий метод GetByAd
             return existingUser != null;
         }
 
@@ -37,23 +32,31 @@ namespace HRBackend.Application.Services
             };
 
             // Добавляем пользователя
-            _userRepository.Add(user);
+            UserRepository.Add(user);
 
             // Сохраняем изменения
-            await _unitOfWork.SaveAsync(cancellationToken);
+            await unitOfWork.SaveAsync(cancellationToken);
 
             return $"Пользователь {request.Login} зарегистрирован с ролью HR.";
-        }*/
+        }
 
         public async Task<UserDTO?> AuthenticateUserAsync(string login, string password, CancellationToken cancellationToken)
         {
-            var user = await userReposiotry.GetByAdPass(login, password);
+
+            // Поиск пользователя в репозитории
+            var user = await UserRepository.GetByAdPass(login, password);
+
             if (user == null)
-                return null;
+                return null; // Пользователь не найден или пароль неверный
 
-            return new UserDTO(user);
+            // Возвращаем DTO
+            return new UserDTO(user)
+            {
+                Id = user.Id,
+                Login = user.Login,
+                Role = user.Role,
+                // Другие необходимые свойства
+            };
         }
-
-
     }
 }

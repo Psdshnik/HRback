@@ -3,6 +3,7 @@ using System;
 using HRBackend.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HRBackend.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250529151843_InitialCreate432")]
+    partial class InitialCreate432
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,6 +48,9 @@ namespace HRBackend.Persistence.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("integer");
+
                     b.Property<string>("WorkSchedule")
                         .IsRequired()
                         .HasColumnType("text");
@@ -57,6 +63,8 @@ namespace HRBackend.Persistence.Migrations
                     b.HasIndex("PersonalInfoId");
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("candidates", (string)null);
                 });
@@ -270,10 +278,14 @@ namespace HRBackend.Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("HRBackend.Domain.Entities.User", "User")
-                        .WithMany("Candidates")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("HRBackend.Domain.Entities.User", null)
+                        .WithMany("Candidates")
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("PersonalInfo");
 

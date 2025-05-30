@@ -13,5 +13,6 @@ namespace HRBackend.Domain.Repositories
         Task<User?> GetByAd(string ad);
         Task<IEnumerable<User>?> GetAll();
         Task<User?> GetByAdPass(string ad, string password);
+        Task<User> Add(User user);
     }
 }

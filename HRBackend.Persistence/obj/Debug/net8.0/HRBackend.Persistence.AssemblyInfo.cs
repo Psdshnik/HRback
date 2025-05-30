@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HRBackend.Persistence")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eb4a123c752d39e7b4f01e420e2670dc8d2f6bb7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c633aed908bfaf4afaa8996a5061d02663141cec")]
 [assembly: System.Reflection.AssemblyProductAttribute("HRBackend.Persistence")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HRBackend.Persistence")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

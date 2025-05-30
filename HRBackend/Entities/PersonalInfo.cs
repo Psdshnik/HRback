@@ -14,6 +14,5 @@ namespace HRBackend.Domain.Entities
         public int CountryId { get; set; }
         public DictCountry Country { get; set; }
         public NameSocailEnum NameSocail { get; set; }
-
     }
 }

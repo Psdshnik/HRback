@@ -18,7 +18,7 @@ namespace HRBackend.Persistence
         public DbSet<WorkingGroup> WorkGroups { get; set; } 
         public DbSet<Check> Checks { get; set; } 
         public DbSet<CheckEvent> CheckEvents { get; set; }
-
+        
         public AppDbContext(DbContextOptions<AppDbContext> options) 
             : base(options) {}
 

@@ -9,6 +9,8 @@ namespace HRBackend.Domain.Repositories
 {
     public interface ICandidateRepository
     {
-        void Add(Candidate candidate);
+        Task<Candidate> Add(Candidate candidate);
+        Task<Candidate> Update(Candidate candidate);
+        Task<Candidate> GetById(int id);
     }
 }

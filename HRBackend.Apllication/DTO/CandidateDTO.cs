@@ -14,8 +14,8 @@ namespace HRBackend.Application.DTO
         public string Country { get; set; }
         public DateTime BirthDate { get; set; }
         public string WorkSchedule { get; set; }
-        public string WorkingGroup { get; set; }
         public string Status { get; set; }
+        public int UserId { get; set; } // +
 
         // Конструктор для маппинга данных из сущности Candidate
         public CandidateDTO(Candidate newCandidate)
@@ -29,9 +29,9 @@ namespace HRBackend.Application.DTO
             SocialMedia = newCandidate.PersonalInfo?.NameSocail.ToString() ?? string.Empty;  // Проверяем на null
             Country = newCandidate.PersonalInfo?.Country?.Name ?? string.Empty;  // Проверяем на null, предполагается, что PersonalInfo имеет связь с DictCountry
             BirthDate = newCandidate.PersonalInfo?.DateAdd ?? DateTime.MinValue;  // Используем DateAdd или другое поле, если BirthDate не хранится в PersonalInfo
-
             WorkSchedule = newCandidate.WorkSchedule.ToString();  // Преобразуем в строку, так как это enum
             Status = newCandidate.Status.ToString();  // Преобразуем в строку, так как это enum
+            UserId = newCandidate.UserId;
         }
     }
 }

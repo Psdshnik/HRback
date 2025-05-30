@@ -54,6 +54,7 @@ void AddRepositories(IServiceCollection services)//репозитории scoped
     services.AddScoped<IUserReposiotry, UserRepository>();
     services.AddScoped<ICandidateRepository, CandidateRepository>();
     services.AddScoped<IUnitOfWork, UnitOfWork>();
+    builder.Services.AddHttpContextAccessor();
 }
 void AddHttpClients(IServiceCollection services)
 {
@@ -88,9 +89,10 @@ void AddAuth(IServiceCollection services, IConfiguration configuration)
 }
 void AddServices(IServiceCollection services)//сервисы scoped потому что должны быть созданы на каждый запрос свои
 {
-    services.AddScoped<CandidateService>();
+    //services.AddScoped<CandidateService>();
     services.AddScoped<JwtService>();
     services.AddScoped<IUserService, UserService>();
+    services.AddScoped<ICandidateService, CandidateService>();
 }
 void AddHealthChecks(IServiceCollection services)
 {

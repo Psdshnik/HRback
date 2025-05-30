@@ -23,7 +23,7 @@ namespace HRBackend.Web.Controllers
             _jwtService = jwtService;
         }
 
-        /*[HttpPost("register-hr")]
+        [HttpPost("register-hr")]
         [Authorize(Roles = "Admin")]
         [Produces(typeof(string))]
         [SwaggerOperation(Summary = "Регистрация HR", Description = "Создает нового пользователя с ролью HR")]
@@ -44,7 +44,7 @@ namespace HRBackend.Web.Controllers
                     return BadRequest(ex.Message);
                 return BadRequest(ex.Message);
             }
-        }*/
+        }
 
         [HttpPost("authorize")]
         [SwaggerOperation(Summary = "Авторизация", Description = "Происходит авторизация, возвращается JWT токен")]
@@ -52,12 +52,12 @@ namespace HRBackend.Web.Controllers
         {
             try
             {
-                // Получаем DTO пользователя напрямую
+                // Получаем DTO пользователя через сервис
                 UserDTO userDTO = await _userService.AuthenticateUserAsync(request.Login, request.Password, cancellationToken);
 
                 if (userDTO == null)
                 {
-                    return BadRequest("Неверные данные для авторизации");
+                    return BadRequest("Неверный логин или пароль");
                 }
 
                 var accessToken = _jwtService.GenerateAccessToken(userDTO.Id, userDTO.Login, userDTO.Role);
@@ -67,7 +67,7 @@ namespace HRBackend.Web.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest($"Ошибка авторизации: {ex.Message}");
             }
         }
     }

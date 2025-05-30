@@ -4,115 +4,104 @@ using HRBackend.Application.Interface;
 using HRBackend.Domain.Entities;
 using HRBackend.Domain.Repositories;
 using HRBackend.Domain.Enums;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
 namespace HRBackend.Application.Services
 {
 public class CandidateService(IUserReposiotry userReposiotry,
       ICandidateRepository candidateRepository,
-      IUnitOfWork unitOfWork) : ICandidateService
+      IUnitOfWork unitOfWork,
+      IHttpContextAccessor httpContextAccessor) : ICandidateService
   {
-
         // Метод создания кандидата
         public async Task<CandidateDTO> CreateCandidateAsync(CandidateCreateRequest request, CancellationToken cancellationToken)
         {
-            // Получаем пользователя по ID
-            var user = await userReposiotry.GetById(request.UserId); // Используем асинхронный метод
+            // Получаем userId из токена
+            var userId = int.Parse(httpContextAccessor.HttpContext!.User
+                .FindFirst(ClaimTypes.NameIdentifier)!.Value);
 
+            var user = await userReposiotry.GetById(userId);
             if (user == null)
                 throw new Exception("Пользователь не найден");
+
+
             var newCandidate = new Candidate
             {
-                User = user,
-                WorkSchedule=request.WorkSchedule,       
+                UserId = userId,
+                WorkSchedule = request.WorkSchedule,
                 Status = request.StatusCandidataId,
-                DateUp = DateTime.UtcNow
+                DateUp = DateTime.UtcNow,
+                PersonalInfo = new PersonalInfo
+                {
+                    Name = request.Name,
+                    Surname = request.Surname,
+                    Middlename = request.Middlename,
+                    Email = request.Email,
+                    Phone = request.Phone,
+                    NameSocail = request.NameSocail,
+                    CountryId = request.CountryId,
+                    DateAdd = request.BirthDate
+                }
             };
 
-            // Добавляем кандидата в базу данных
-            candidateRepository.Add(newCandidate);
 
-            // Сохраняем изменения
-            await unitOfWork.SaveAsync();
+            candidateRepository.Add(newCandidate);
+            unitOfWork.SaveAsync(cancellationToken);
 
             // Возвращаем DTO с данными кандидата
             return new CandidateDTO(newCandidate);
         }
 
-        public Task<CandidateDTO> UpdateCandidateAsync(CandidateUpdateRequest request, CancellationToken cancellationToken)
+
+        // Метод редактирования кандидата
+        public async Task<CandidateDTO> UpdateCandidateAsync(CandidateUpdateRequest request,CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            // 1. Проверка входных данных
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
+
+            // Получаем userId из токена
+            var userId = int.Parse(httpContextAccessor.HttpContext!.User
+                .FindFirst(ClaimTypes.NameIdentifier)!.Value);
+
+            var user = await userReposiotry.GetById(userId);
+            if (user == null)
+                throw new Exception("Пользователь не найден");
+
+            // 3. Получаем кандидата из БД
+            var candidate = await candidateRepository.GetById(request.Id);
+            if (candidate == null)
+                throw new KeyNotFoundException("Кандидат не найден");
+
+
+            var updatedCandidate = new Candidate
+            {
+                Id = candidate.Id,
+                WorkSchedule = request.WorkSchedule ?? candidate.WorkSchedule,
+                Status = request.StatusCandidataId ?? candidate.Status,//Status = request.StatusCandidataId ?? candidate.Status,
+                UserId = candidate.UserId, // Сохраняем оригинального пользователя
+                PersonalInfo = new PersonalInfo
+                {
+                    Name = request.Name ?? candidate.PersonalInfo.Name,
+                    Surname = request.Surname ?? candidate.PersonalInfo.Surname,
+                    Middlename = request.Middlename ?? candidate.PersonalInfo.Middlename,
+                    Email = request.Email ?? candidate.PersonalInfo.Email,
+                    Phone = request.Phone ?? candidate.PersonalInfo.Phone,
+                    NameSocail = request.NameSocail ?? candidate.PersonalInfo.NameSocail,
+                    CountryId = request.CountryId ?? candidate.PersonalInfo.CountryId,
+                    DateAdd = DateTime.UtcNow
+                }
+            };
+
+            
+
+            await candidateRepository.Update(updatedCandidate);
+            await unitOfWork.SaveAsync(cancellationToken);
+
+            return new CandidateDTO(candidate);
         }
     }
-
-    // Метод редактирования кандидата
-    /*public async Task<CandidateDTO> UpdateCandidateAsync(CandidateUpdateRequest request, CancellationToken cancellationToken)
-  {
-      //var workSchedule = await _context.WorkSchedules
-      //    .FirstOrDefaultAsync(ws => ws.Id == request.WorkScheduleId, cancellationToken);
-
-      //var workingGroup = await _context.WorkGroups
-      //    .FirstOrDefaultAsync(wg => wg.Id == request.WorkingGroupId, cancellationToken);
-
-      //var statusCandidata = await _context.DictStatusCandidata
-      //    .FirstOrDefaultAsync(sc => sc.Id == request.StatusCandidataId, cancellationToken);
-
-      //var personalInfo = await _context.PersonalInfo
-      //    .FirstOrDefaultAsync(pi => pi.Id == request.PersonalInfoId, cancellationToken);
-
-      //if (workSchedule == null || workingGroup == null || statusCandidata == null || personalInfo == null)
-      //{
-      //    throw new Exception("WorkSchedule, WorkingGroup, StatusCandidata или PersonalInfo не найдены.");
-      //}
-
-      //// Получаем кандидата по ID
-      //var candidate = await _context.Candidates
-      //    .Include(c => c.PersonalInfo)  // Подключаем PersonalInfo для редактирования
-      //    .FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
-
-      //if (candidate == null)
-      //{
-      //    throw new Exception("Кандидат не найден.");
-      //}
-
-      //// Обновляем данные кандидата
-      //candidate.WorkSchedule = workSchedule;
-      //candidate.WorkingGroup = workingGroup;
-      //candidate.StatusCandidataId = statusCandidata;
-      //candidate.PersonalInfo = personalInfo;
-
-      //// Обновляем данные в PersonalInfo
-      //candidate.PersonalInfo.Name = request.Name ?? candidate.PersonalInfo.Name;
-      //candidate.PersonalInfo.Surname = request.Surname ?? candidate.PersonalInfo.Surname;
-      //candidate.PersonalInfo.Middlename = request.Middlename ?? candidate.PersonalInfo.Middlename;
-      //candidate.PersonalInfo.Email = request.Email ?? candidate.PersonalInfo.Email;
-      //candidate.PersonalInfo.Phone = request.Phone ?? candidate.PersonalInfo.Phone;
-      //candidate.PersonalInfo.NameSocail = request.SocialMedia ?? candidate.PersonalInfo.NameSocail;
-
-      //// Дата последнего обновления остается текущей
-      //candidate.DateUp = DateTime.UtcNow;
-
-      //// Сохраняем изменения в базе данных
-      //await _context.SaveChangesAsync(cancellationToken);
-
-      //// Возвращаем DTO с обновленными данными кандидата
-      //return new CandidateDTO
-      //{
-      //    Id = candidate.Id,
-      //    Name = candidate.PersonalInfo.Name,
-      //    Surname = candidate.PersonalInfo.Surname,
-      //    Middlename = candidate.PersonalInfo.Middlename,
-      //    Email = candidate.PersonalInfo.Email,
-      //    Phone = candidate.PersonalInfo.Phone,
-      //    SocialMedia = candidate.PersonalInfo.NameSocail,
-      //    Country = request.Country,  // Используем данные из запроса
-      //    BirthDate = request.BirthDate,  // Используем данные из запроса
-      //    WorkSchedule = candidate.WorkSchedule.Name,
-      //    WorkingGroup = candidate.WorkingGroup.Name,
-      //    Status = candidate.StatusCandidataId.Name,
-      //    //DateUp = candidate.DateUp
-      //};
-      return null;
-      //переписать
-  }
-}*/
 }
+
+//candidate = updatedCandidate;

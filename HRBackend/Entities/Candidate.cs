@@ -1,5 +1,6 @@
 ﻿using HRBackend.Domain.Entities;
 using HRBackend.Domain.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
 
 public class Candidate
 {
@@ -12,6 +13,22 @@ public class Candidate
     public int PersonalInfoId { get; set; }
     public PersonalInfo PersonalInfo { get; set; } = null!;
 
-  
+
+    public override bool Equals(object? obj)
+    {
+        var item = obj as Candidate;
+
+        if (item == null)
+        {
+            return false;
+        }
+
+        return Id.Equals(item.Id);
+    }
+
+    public override int GetHashCode()
+    {
+        return Id.GetHashCode();
+    }
 }
 
