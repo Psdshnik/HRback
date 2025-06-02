@@ -46,8 +46,8 @@ public class CandidateService(IUserReposiotry userReposiotry,
             };
 
 
-            candidateRepository.Add(newCandidate);
-            unitOfWork.SaveAsync(cancellationToken);
+            await candidateRepository.Add(newCandidate);
+            await unitOfWork.SaveAsync(cancellationToken);
 
             // Возвращаем DTO с данными кандидата
             return new CandidateDTO(newCandidate);
@@ -62,7 +62,7 @@ public class CandidateService(IUserReposiotry userReposiotry,
                 throw new ArgumentNullException(nameof(request));
 
             // Получаем userId из токена
-            var userId = int.Parse(httpContextAccessor.HttpContext!.User
+            var userId = int.Parse(httpContextAccessor.HttpContext!.User //не нужно сюда accessor прокидывать, сделай прослойку которая будет получать его, а на ружу отдавать тебе UserId и ее уже используй тут, а еще лучше прямо туда добавь метод получения юзера сразу
                 .FindFirst(ClaimTypes.NameIdentifier)!.Value);
 
             var user = await userReposiotry.GetById(userId);
@@ -75,28 +75,19 @@ public class CandidateService(IUserReposiotry userReposiotry,
                 throw new KeyNotFoundException("Кандидат не найден");
 
 
-            var updatedCandidate = new Candidate
-            {
-                Id = candidate.Id,
-                WorkSchedule = request.WorkSchedule ?? candidate.WorkSchedule,
-                Status = request.StatusCandidataId ?? candidate.Status,//Status = request.StatusCandidataId ?? candidate.Status,
-                UserId = candidate.UserId, // Сохраняем оригинального пользователя
-                PersonalInfo = new PersonalInfo
-                {
-                    Name = request.Name ?? candidate.PersonalInfo.Name,
-                    Surname = request.Surname ?? candidate.PersonalInfo.Surname,
-                    Middlename = request.Middlename ?? candidate.PersonalInfo.Middlename,
-                    Email = request.Email ?? candidate.PersonalInfo.Email,
-                    Phone = request.Phone ?? candidate.PersonalInfo.Phone,
-                    NameSocail = request.NameSocail ?? candidate.PersonalInfo.NameSocail,
-                    CountryId = request.CountryId ?? candidate.PersonalInfo.CountryId,
-                    DateAdd = DateTime.UtcNow
-                }
-            };
 
-            
+            candidate.WorkSchedule = request.WorkSchedule ?? candidate.WorkSchedule;
+            candidate.Status = request.StatusCandidataId ?? candidate.Status;
+            candidate.PersonalInfo.Name = request.Name ?? candidate.PersonalInfo.Name;
+            candidate.PersonalInfo.Surname = request.Surname ?? candidate.PersonalInfo.Surname;
+            candidate.PersonalInfo.Middlename = request.Middlename ?? candidate.PersonalInfo.Middlename;
+            candidate.PersonalInfo.Email = request.Email ?? candidate.PersonalInfo.Email;
+            candidate.PersonalInfo.Phone = request.Phone ?? candidate.PersonalInfo.Phone;
+            candidate.PersonalInfo.NameSocail = request.NameSocail ?? candidate.PersonalInfo.NameSocail;
+            candidate.PersonalInfo.CountryId = request.CountryId ?? candidate.PersonalInfo.CountryId;
+            candidate.PersonalInfo.DateAdd = DateTime.UtcNow;
 
-            await candidateRepository.Update(updatedCandidate);
+
             await unitOfWork.SaveAsync(cancellationToken);
 
             return new CandidateDTO(candidate);
