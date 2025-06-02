@@ -1,10 +1,10 @@
 .vs/
 
-HRBackend.Application/bin
-HRBackend.Application/obj
+HRBackend.Apllication/bin
+HRBackend.Apllication/obj
 
-HRBackend.Persistance/bin
-HRBackend.Persistance/obj
+HRBackend.Persistence/bin
+HRBackend.Persistence/obj
 
 HRBackend.Web/bin
 HRBackend.Web/obj
